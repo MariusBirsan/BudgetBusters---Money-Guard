@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/BudgetBusters-MoneyGuard/static/css/main.7acaea2f.css",
+    "main.js": "/BudgetBusters-MoneyGuard/static/js/main.07d3183d.js",
+    "index.html": "/BudgetBusters-MoneyGuard/index.html",
+    "main.7acaea2f.css.map": "/BudgetBusters-MoneyGuard/static/css/main.7acaea2f.css.map",
+    "main.07d3183d.js.map": "/BudgetBusters-MoneyGuard/static/js/main.07d3183d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.07d3183d.js"
+  ]
+}
