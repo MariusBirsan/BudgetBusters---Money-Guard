@@ -4,12 +4,12 @@ import { Routes, Route } from 'react-router-dom';
 import RegisterForm from './authForm/RegisterForm';
 import LoginForm from './authForm/LoginForm';
 import HomePage from './HomePage';
-import Navigation from './authForm/Navigation';
+//import Navigation from './authForm/Navigation';
 import PrivateRoute from './authForm/PrivateRoute';
 import { useSelector } from 'react-redux';
 
 const App = () => {
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  //const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   return (
     <div>
