@@ -6,7 +6,7 @@ import LoginForm from './authForm/LoginForm';
 import HomePage from './HomePage';
 //import Navigation from './authForm/Navigation';
 import PrivateRoute from './authForm/PrivateRoute';
-import { useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 
 const App = () => {
   //const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
