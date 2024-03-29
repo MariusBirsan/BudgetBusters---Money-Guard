@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { register } from '../../redux/authSlice';
+import { register } from '../../redux/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import './FormStyles.css';
 
