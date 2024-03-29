@@ -6,6 +6,7 @@ import LoginForm from './authForm/LoginForm';
 import HomePage from './HomePage';
 //import Navigation from './authForm/Navigation';
 import PrivateRoute from './authForm/PrivateRoute';
+import Currency from './Currency/Currency';
 //import { useSelector } from 'react-redux';
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
           element={
             <PrivateRoute>
               <HomePage />
+              <Currency />
             </PrivateRoute>
           }
         />
