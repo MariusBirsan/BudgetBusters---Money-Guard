@@ -1,13 +1,12 @@
 // src/redux/authSlice.js
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
-const API_BASE_URL = 'https://wallet.b.goit.study/api/auth';
+import { API_BASE_URL } from '../services/apiConfig';
 
 export const register = createAsyncThunk(
   'auth/register',
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/sign-up`, {
+      const response = await fetch(`${API_BASE_URL}/auth/sign-up`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,7 +35,7 @@ export const logIn = createAsyncThunk(
   'auth/login',
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/sign-in`, {
+      const response = await fetch(`${API_BASE_URL}/auth/sign-in`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +57,7 @@ export const logOut = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     const token = getState().auth.token;
     try {
-      const response = await fetch(`${API_BASE_URL}/sign-out`, {
+      const response = await fetch(`${API_BASE_URL}/auth/sign-out`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

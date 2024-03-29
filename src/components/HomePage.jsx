@@ -2,7 +2,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logOut } from '../redux/authSlice';
+import { logOut } from '../redux/auth/authSlice';
 import { ButtonAddTransactions } from './ButtonAddTransactions/ButtonAddTransactions';
 
 const HomePage = () => {
