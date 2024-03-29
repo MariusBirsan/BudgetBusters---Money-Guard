@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logOut } from '../redux/authSlice';
+import { ButtonAddTransactions } from './ButtonAddTransactions/ButtonAddTransactions';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const HomePage = () => {
       <h1>Welcome to the App!</h1>
       <p>This is your homepage.</p>
       <button onClick={handleLogout}>Logout</button>
+      <ButtonAddTransactions />
     </div>
   );
 };
