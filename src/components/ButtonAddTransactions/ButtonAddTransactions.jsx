@@ -1,9 +1,11 @@
 import React from 'react';
 
-export const ButtonAddTransactions = () => {
+export const ButtonAddTransactions = ({ onClick }) => {
   return (
     <>
-      <button type="button">Add Transactions</button>
+      <button type="button" onClick={onClick}>
+        Add Transactions
+      </button>
     </>
   );
 };
