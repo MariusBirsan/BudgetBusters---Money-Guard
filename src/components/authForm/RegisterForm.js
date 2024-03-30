@@ -38,7 +38,7 @@ const RegisterForm = () => {
     dispatch(register({ email: values.email, password: values.password }))
       .unwrap()
       .then(() => {
-        navigate('/');
+        navigate('/dashboard/home');
       })
       .catch(error => {
         setStatus({ success: false, error: error });
