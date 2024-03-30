@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const Logo = ({ variant }) => {
   return (
-    <a className={`${styles.logo} ${styles[variant]}`} /*href="index.html"*/>
+    <a className={`${styles.logo} ${styles[variant]}`} href="index.html">
       <svg>
         <use href={`${icons}#icon-logo`}></use>
       </svg>

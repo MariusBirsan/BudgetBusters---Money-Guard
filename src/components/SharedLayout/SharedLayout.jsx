@@ -5,7 +5,7 @@ import Navigation from 'components/Navigation/Navigation';
 import Balance from 'components/Balance/Balance';
 
 import { useMediaQuery } from 'react-responsive';
-import TestCurrencyGraph from 'components/TestCurrencyGraph/TestCurrencyGraph';
+//import TestCurrencyGraph from 'components/TestCurrencyGraph/TestCurrencyGraph';
 import Currency from 'components/Currency/Currency';
 
 const SharedLayout = () => {
