@@ -30,7 +30,7 @@ const LoginForm = () => {
     dispatch(logIn({ email: values.email, password: values.password }))
       .unwrap()
       .then(() => {
-        navigate('/');
+        navigate('/dashboard/home');
       })
       .catch(error => {
         setStatus({ success: false, error: error });
