@@ -22,7 +22,7 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/login" element={<LoginForm />} />
+      <Route path="/" element={<LoginForm />} />
       <Route path="/register" element={<RegisterForm />} />
 
       <Route path="/dashboard" element={<SharedLayout />}>
