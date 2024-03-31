@@ -1,3 +1,9 @@
 .TransactionTable {
   background-color: aquamarine;
+  display: flex;
+}
+
+.tableRow {
+  display: flex;
+  flex-direction: column;
 }

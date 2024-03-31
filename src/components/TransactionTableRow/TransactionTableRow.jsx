@@ -1,23 +1,28 @@
+import icons from '../../images/icons/sprite.svg';
 import styles from './TransactionTableRow.module.css';
 
 const TransactionTableRow = ({ transaction }) => {
   const { type, categoryId, comment, amount } = transaction;
   return (
-    <>
-      <tr className={styles.TransactionTableRow}>
+    <tr>
+      <td className={styles.TransactionTableRow}>
         {transaction.transactionDate}
-      </tr>
-      <tr className={styles.TransactionTableRow}>{type}</tr>
-      <tr className={styles.TransactionTableRow}>{categoryId}</tr>
-      <tr className={styles.TransactionTableRow}>{comment}</tr>
-      <tr className={styles.TransactionTableRow}>{amount}</tr>
-      <tr className={styles.TransactionTableRow}>
-        <button type="button">Edit</button>
-      </tr>
-      <tr className={styles.TransactionTableRow}>
+      </td>
+      <td className={styles.TransactionTableRow}>{type}</td>
+      <td className={styles.TransactionTableRow}>{categoryId}</td>
+      <td className={styles.TransactionTableRow}>{comment}</td>
+      <td className={styles.TransactionTableRow}>{amount}</td>
+      <td className={styles.TransactionTableRow}>
+        <button className={styles.editButton} type="button">
+          <svg className={styles.editIcon}>
+            <use href={`${icons}#icon-edit`}></use>
+          </svg>
+        </button>
+      </td>
+      <td className={styles.TransactionTableRow}>
         <button type="button">Delete</button>
-      </tr>
-    </>
+      </td>
+    </tr>
   );
 };
 
