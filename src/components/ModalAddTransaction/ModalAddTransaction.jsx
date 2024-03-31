@@ -24,6 +24,7 @@ const ModalAddTransaction = ({ closeModal }) => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // [] to ensure that the effect is only called once on mount
 
   return (
