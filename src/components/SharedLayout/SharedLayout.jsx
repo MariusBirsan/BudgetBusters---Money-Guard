@@ -34,7 +34,7 @@ const SharedLayout = () => {
             {/* Todo: just for test */}
             {/* {screenCondition && <TestCurrencyGraph />} */}
           </div>
-
+          {/* todo : suspense */}
           <Outlet />
         </div>
       </section>
