@@ -1,19 +1,7 @@
-import { useState } from 'react';
 import TransactionTableRow from 'components/TransactionTableRow/TransactionTableRow';
 import styles from './TransactionsTable.module.css';
 
 const TransactionsTable = ({ data }) => {
-  const [rows, setRows] = useState([]);
-
-  const addRow = () => {
-    const newRowData = TransactionTableRow(); // Fetch data for new row
-    const newRow = {
-      id: rows.length + 1,
-      data: newRowData,
-    };
-    setRows([...rows, newRow]);
-  };
-
   return (
     <div className={styles.TransactionsTable}>
       <table>
@@ -28,7 +16,7 @@ const TransactionsTable = ({ data }) => {
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className={styles.tableBody}>
           {data.map(item => (
             <TransactionTableRow key={item.id} transaction={item} />
           ))}

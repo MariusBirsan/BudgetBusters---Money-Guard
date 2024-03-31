@@ -1,3 +1,8 @@
 .TransactionTableRow {
-  background-color: aquamarine;
+  padding: 0;
+}
+
+.editIcon {
+  width: 14px;
+  height: 14px;
 }
