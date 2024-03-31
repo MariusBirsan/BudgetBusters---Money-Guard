@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { expensesCategories } from '../../constants/expensesCategories'; // Importăm lista de categorii de cheltuieli
+import { expensesCategories } from '../../constants/expensesCategories'; // Import the list of expense categories
 
-const AddTransactionForm = () => {
+const AddTransactionForm = ({ closeModal }) => {
   const [transactionType, setTransactionType] = useState('income');
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState('');
   const [comment, setComment] = useState('');
-  const [category, setCategory] = useState(expensesCategories[0].id); // Inițializăm cu id-ul primei categorii din listă
+  const [category, setCategory] = useState(expensesCategories[0].id); // Initialize with the id of the first category from the list
 
   const handleAmountChange = event => {
     setAmount(event.target.value);
@@ -30,7 +30,7 @@ const AddTransactionForm = () => {
     const transactionData = {
       transactionDate: date,
       type: transactionType.toUpperCase(),
-      categoryId: category, // Utilizăm id-ul categoriei
+      categoryId: category, // Use the category id
       comment: comment,
       amount: parseFloat(amount),
     };
@@ -40,25 +40,25 @@ const AddTransactionForm = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Adaugă header-ul de autorizare aici, dacă este necesar
+          // Add authorization header here if needed
         },
         body: JSON.stringify(transactionData),
       });
 
       if (response.ok) {
-        // Tranzacția a fost creată cu succes:
-        console.log('Tranzacția a fost creată cu succes');
-        // Resetăm câmpurile formularului:
+        // Transaction created successfully:
+        console.log('Transaction created successfully');
+        // Reset form fields:
         setAmount('');
         setDate('');
         setComment('');
-        setCategory(expensesCategories[0].id); // Resetăm la id-ul primei categorii din listă
+        setCategory(expensesCategories[0].id); // Reset to the id of the first category from the list
       } else {
-        // A apărut o eroare la crearea tranzacției
-        console.error('Eroare la crearea tranzacției:', response.statusText);
+        // Error creating transaction
+        console.error('Error creating transaction:', response.statusText);
       }
     } catch (error) {
-      console.error('Eroare la crearea tranzacției:', error);
+      console.error('Error creating transaction:', error);
     }
   };
 
@@ -68,35 +68,22 @@ const AddTransactionForm = () => {
     );
   };
 
+  const handleCancel = () => {
+    // Reset form fields:
+    setAmount('');
+    setDate('');
+    setComment('');
+    setCategory(expensesCategories[0].id); // Reset to the id of the first category from the list
+  };
+
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="amount">Sumă:</label>
-        <input
-          type="number"
-          id="amount"
-          value={amount}
-          onChange={handleAmountChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="date">Dată:</label>
-        <input
-          type="date"
-          id="date"
-          value={date}
-          onChange={handleDateChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="comment">Comentariu:</label>
-        <textarea id="comment" value={comment} onChange={handleCommentChange} />
-      </div>
-      {transactionType === 'expense' && ( // Afișăm dropdown-ul doar dacă tipul de tranzacție este cheltuială
+      <button type="button" onClick={handleToggleTransactionType}>
+        Toggle transaction type
+      </button>
+      {transactionType === 'expense' && (
         <div>
-          <label htmlFor="category">Categorie:</label>
+          <label htmlFor="category">Category:</label>
           <select
             id="category"
             value={category}
@@ -110,12 +97,39 @@ const AddTransactionForm = () => {
           </select>
         </div>
       )}
-      <button type="submit">
-        {transactionType === 'income' ? 'Adaugă venit' : 'Adaugă cheltuială'}
-      </button>
-      <button type="button" onClick={handleToggleTransactionType}>
-        Comută tip tranzacție
-      </button>
+      <div>
+        <label htmlFor="amount">Amount:</label>
+        <input
+          type="number"
+          id="amount"
+          value={amount}
+          onChange={handleAmountChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="date">Date:</label>
+        <input
+          type="date"
+          id="date"
+          value={date}
+          onChange={handleDateChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="comment">Comment:</label>
+        <textarea id="comment" value={comment} onChange={handleCommentChange} />
+      </div>
+
+      <div>
+        <button type="submit">
+          {transactionType === 'income' ? 'Add Income' : 'Add Expense'}
+        </button>
+        <button type="button" onClick={handleCancel}>
+          Cancel
+        </button>
+      </div>
     </form>
   );
 };
