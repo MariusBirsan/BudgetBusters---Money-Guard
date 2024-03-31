@@ -70,7 +70,7 @@ const HomePage = () => {
   ];
 
   return (
-    <div className={`container ${styles.HomePage}`}>
+    <div className={styles.HomePage}>
       {screenCondition ? (
         <TransactionsTable data={data} />
       ) : (
