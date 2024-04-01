@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import AddTransactionForm from '../AddTransactionForm/AddTransactionForm';
-import styles from './ModalAddTransaction.module.css'; // Import styles
+import styles from './ModalAddTransaction.module.css';
 
 const ModalAddTransaction = ({ closeModal }) => {
   const onBackdropClick = e => {
@@ -24,8 +24,10 @@ const ModalAddTransaction = ({ closeModal }) => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // [] to ensure that the effect is only called once on mount
+  // Nu elimina comentariile de mai sus! Don't delete the comments above!
 
   return (
     <div className={styles['modal-overlay']} onClick={onBackdropClick}>

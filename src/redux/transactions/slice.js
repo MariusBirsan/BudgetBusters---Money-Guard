@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-const TRANSACTION_ADD = 'transactions/add';
-const TRANSACTION_GET_ALL = 'transactions/getAll';
-const TRANSACTION_UPDATE = 'transactions/update';
-const TRANSACTION_DELETE = 'transactions/delete';
-const TRANSACTION_CATEGORIES_GET_ALL = 'transactionCategories/getAll';
-const TRANSACTION_SUMMARY_GET = 'transactionSummary/get';
+import {
+  addTransactionThunk,
+  getAllTransactionsThunk,
+  updateTransactionThunk,
+  deleteTransactionThunk,
+  getTransactionCategoriesThunk,
+  getTransactionSummaryThunk,
+} from './operations';
 
 const initialState = {
   categories: [],
@@ -22,41 +23,41 @@ const transactionsSlice = createSlice({
     builder
 
       // PENDING:
-      .addCase(TRANSACTION_ADD.pending, (state, action) => {
+      .addCase(addTransactionThunk.pending, (state, action) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(TRANSACTION_GET_ALL.pending, (state, action) => {
+      .addCase(getAllTransactionsThunk.pending, (state, action) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(TRANSACTION_UPDATE.pending, (state, action) => {
+      .addCase(updateTransactionThunk.pending, (state, action) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(TRANSACTION_DELETE.pending, (state, action) => {
+      .addCase(deleteTransactionThunk.pending, (state, action) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(TRANSACTION_CATEGORIES_GET_ALL.pending, (state, action) => {
+      .addCase(getTransactionCategoriesThunk.pending, (state, action) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(TRANSACTION_SUMMARY_GET.pending, (state, action) => {
+      .addCase(getTransactionSummaryThunk.pending, (state, action) => {
         state.loading = true;
         state.error = null;
       })
 
       // FULFILLED:
-      .addCase(TRANSACTION_ADD.fulfilled, (state, action) => {
+      .addCase(addTransactionThunk.fulfilled, (state, action) => {
         state.transactions.push(action.payload);
         state.loading = false;
       })
-      .addCase(TRANSACTION_GET_ALL.fulfilled, (state, action) => {
+      .addCase(getAllTransactionsThunk.fulfilled, (state, action) => {
         state.transactions = action.payload;
         state.loading = false;
       })
-      .addCase(TRANSACTION_UPDATE.fulfilled, (state, action) => {
+      .addCase(updateTransactionThunk.fulfilled, (state, action) => {
         const index = state.transactions.findIndex(
           t => t.id === action.payload.id
         );
@@ -65,50 +66,50 @@ const transactionsSlice = createSlice({
         }
         state.loading = false;
       })
-      .addCase(TRANSACTION_DELETE.fulfilled, (state, action) => {
+      .addCase(deleteTransactionThunk.fulfilled, (state, action) => {
         state.transactions = state.transactions.filter(
           t => t.id !== action.payload
         );
         state.loading = false;
       })
-      .addCase(TRANSACTION_CATEGORIES_GET_ALL.fulfilled, (state, action) => {
+      .addCase(getTransactionCategoriesThunk.fulfilled, (state, action) => {
         state.categories = action.payload;
         state.loading = false;
       })
-      .addCase(TRANSACTION_SUMMARY_GET.fulfilled, (state, action) => {
-        // Gestionăm completarea "thunk"-ului pentru sumarul tranzacțiilor.
-        // Modificăm starea corespunzător:
+      .addCase(getTransactionSummaryThunk.fulfilled, (state, action) => {
+        // Handle fulfillment of transaction summary thunk
+        // Modify state accordingly
         state.loading = false;
       })
 
       // REJECTED:
-      .addCase(TRANSACTION_ADD.rejected, (state, action) => {
+      .addCase(addTransactionThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(TRANSACTION_GET_ALL.rejected, (state, action) => {
+      .addCase(getAllTransactionsThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(TRANSACTION_UPDATE.rejected, (state, action) => {
+      .addCase(updateTransactionThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(TRANSACTION_DELETE.rejected, (state, action) => {
+      .addCase(deleteTransactionThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(TRANSACTION_CATEGORIES_GET_ALL.rejected, (state, action) => {
+      .addCase(getTransactionCategoriesThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(TRANSACTION_SUMMARY_GET.rejected, (state, action) => {
-        // Gestionam respingerea "thunk"-ului pentru sumarul tranzacțiilor.
-        //Modificam starea in consecinta:
+      .addCase(getTransactionSummaryThunk.rejected, (state, action) => {
+        // Handle rejection of transaction summary thunk
+        // Modify state accordingly
         state.loading = false;
         state.error = action.payload;
       });
   },
 });
 
-export default transactionsSlice.reducer;
+export const transactionsReducer = transactionsSlice.reducer;
