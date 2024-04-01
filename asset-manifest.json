@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/BudgetBusters-MoneyGuard/static/css/main.77ec3936.css",
-    "main.js": "/BudgetBusters-MoneyGuard/static/js/main.e8b6333e.js",
+    "main.js": "/BudgetBusters-MoneyGuard/static/js/main.d35a4b39.js",
     "static/media/sprite.svg": "/BudgetBusters-MoneyGuard/static/media/sprite.5ce6475f558b29fa917b16efa5e1d63c.svg",
     "index.html": "/BudgetBusters-MoneyGuard/index.html",
     "main.77ec3936.css.map": "/BudgetBusters-MoneyGuard/static/css/main.77ec3936.css.map",
-    "main.e8b6333e.js.map": "/BudgetBusters-MoneyGuard/static/js/main.e8b6333e.js.map"
+    "main.d35a4b39.js.map": "/BudgetBusters-MoneyGuard/static/js/main.d35a4b39.js.map"
   },
   "entrypoints": [
     "static/css/main.77ec3936.css",
-    "static/js/main.e8b6333e.js"
+    "static/js/main.d35a4b39.js"
   ]
 }
