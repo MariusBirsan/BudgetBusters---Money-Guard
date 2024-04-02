@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { expensesCategories } from '../../constants/expensesCategories'; // Import the list of expense categories
+import { expensesCategories } from '../../constants/expensesCategories';
+import styles from './AddTransactionForm.module.css';
 
-const AddTransactionForm = ({ closeModal }) => {
-  const [transactionType, setTransactionType] = useState('income');
+const AddTransactionForm = () => {
+  const currentDate = new Date().toISOString().split('T')[0];
+  const [transactionType, setTransactionType] = useState('expense');
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState('');
   const [comment, setComment] = useState('');
-  const [category, setCategory] = useState(expensesCategories[0].id); // Initialize with the id of the first category from the list
+  const [category, setCategory] = useState('');
 
   const handleAmountChange = event => {
     setAmount(event.target.value);
@@ -27,6 +29,7 @@ const AddTransactionForm = ({ closeModal }) => {
   const handleSubmit = async event => {
     event.preventDefault();
 
+    // Logica de trimitere a datelor la server:
     const transactionData = {
       transactionDate: date,
       type: transactionType.toUpperCase(),
@@ -52,7 +55,7 @@ const AddTransactionForm = ({ closeModal }) => {
         setAmount('');
         setDate('');
         setComment('');
-        setCategory(expensesCategories[0].id); // Reset to the id of the first category from the list
+        setCategory(''); // Reset to empty value
       } else {
         // Error creating transaction
         console.error('Error creating transaction:', response.statusText);
@@ -68,27 +71,32 @@ const AddTransactionForm = ({ closeModal }) => {
     );
   };
 
-  const handleCancel = () => {
-    // Reset form fields:
-    setAmount('');
-    setDate('');
-    setComment('');
-    setCategory(expensesCategories[0].id); // Reset to the id of the first category from the list
-  };
+  // const handleCancel = () => {
+  //   setAmount('');
+  //   setDate('');
+  //   setComment('');
+  //   setCategory('');
+  // };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <button type="button" onClick={handleToggleTransactionType}>
+    <form onSubmit={handleSubmit} className={styles['transaction-form']}>
+      <button
+        type="button"
+        onClick={handleToggleTransactionType}
+        className={styles['toggle-button']}
+      >
         Toggle transaction type
       </button>
       {transactionType === 'expense' && (
         <div>
-          <label htmlFor="category">Category:</label>
           <select
             id="category"
             value={category}
             onChange={handleCategoryChange}
+            className={styles['select']}
+            placeholder="Category"
           >
+            <option value="">Select a category</option> {/* Placeholder */}
             {expensesCategories.map(category => (
               <option key={category.id} value={category.id}>
                 {category.name}
@@ -97,37 +105,39 @@ const AddTransactionForm = ({ closeModal }) => {
           </select>
         </div>
       )}
-      <div>
-        <label htmlFor="amount">Amount:</label>
+      <div className={styles['form-row']}>
         <input
           type="number"
           id="amount"
           value={amount}
           onChange={handleAmountChange}
           required
+          className={`${styles['input']} ${styles['amount-style']}`}
+          placeholder="0.00"
         />
-      </div>
-      <div>
-        <label htmlFor="date">Date:</label>
         <input
           type="date"
           id="date"
-          value={date}
+          value={date || currentDate} // Folosește data curentă sau valoarea din state
           onChange={handleDateChange}
           required
+          className={styles['input']}
+          placeholder="Date"
         />
       </div>
       <div>
-        <label htmlFor="comment">Comment:</label>
-        <textarea id="comment" value={comment} onChange={handleCommentChange} />
+        <textarea
+          id="comment"
+          value={comment}
+          onChange={handleCommentChange}
+          className={styles['textarea']}
+          placeholder="Comment"
+        />
       </div>
 
-      <div>
-        <button type="submit">
+      <div className={styles['button-row']}>
+        <button type="submit" className={styles['submit-button']}>
           {transactionType === 'income' ? 'Add Income' : 'Add Expense'}
-        </button>
-        <button type="button" onClick={handleCancel}>
-          Cancel
         </button>
       </div>
     </form>

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import AddTransactionForm from '../AddTransactionForm/AddTransactionForm';
 import styles from './ModalAddTransaction.module.css';
+import { GrClose } from 'react-icons/gr';
 
 const ModalAddTransaction = ({ closeModal }) => {
   const onBackdropClick = e => {
@@ -32,11 +33,19 @@ const ModalAddTransaction = ({ closeModal }) => {
   return (
     <div className={styles['modal-overlay']} onClick={onBackdropClick}>
       <div className={styles['modal-content']}>
+        <div className={styles['gradient-background']} />{' '}
         <button className={styles['close-button']} onClick={closeModal}>
-          X
+          <GrClose />
         </button>
-        <h2>Add transaction</h2>
+        <h2 className={styles['title']}>Add transaction</h2>
         <AddTransactionForm />
+        <button
+          type="button"
+          onClick={closeModal}
+          className={styles['cancel-button']}
+        >
+          Cancel
+        </button>
       </div>
     </div>
   );

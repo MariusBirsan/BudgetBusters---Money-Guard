@@ -18,6 +18,9 @@ export const getAllTransactionsThunk = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await api.get('/transactions');
+
+      // Afișează datele în consolă:
+      console.log('Datele din API:', response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
