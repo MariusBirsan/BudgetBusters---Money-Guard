@@ -40,6 +40,19 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  color: #ffffff99;
+  transition: all 0.35s ease-in-out;
+}
+
+.userMenu .logOutBtn:hover {
+  color: #ffffff;
+  transform: scale(1.1);
+  transition: all 0.35s ease-in-out;
+}
+
+.userMenu .logOutBtn:active {
+  transform: scale(1.2);
+  transition: all 0.35s ease-in-out;
 }
 
 .userMenu .logOutBtn svg {
@@ -74,8 +87,20 @@
 
   .userMenu .logOutBtn::after {
     content: 'Exit';
-    color: rgba(255, 255, 255, 0.6);
+    color: #ffffff99;
     font-size: 16px;
     line-height: 24px;
+    transition: all 0.35s ease-in-out;
   }
+}
+
+.userMenu .logOutBtn:hover::after {
+  color: #ffffff;
+  transform: scale(1.1);
+  transition: all 0.35s ease-in-out;
+}
+
+.userMenu .logOutBtn:active::after {
+  transform: scale(1.15);
+  transition: all 0.35s ease-in-out;
 }

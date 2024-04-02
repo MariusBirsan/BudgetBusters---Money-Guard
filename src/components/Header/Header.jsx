@@ -1,28 +1,42 @@
 import styles from './Header.module.css';
 import Logo from 'components/common/Logo/Logo';
 import icons from '../../images/icons/sprite.svg';
+import { useState } from 'react';
+import LogOutModal from 'components/LogOutModal/LogOutModal';
 
 // todo: username (useSelector, *take it from email => splice: start, to chart: "@")
 
 const Header = () => {
+  const [logOutModalIsOpen, setlogOutModalIsOpen] = useState(false);
+
+  const closeModal = () => {
+    setlogOutModalIsOpen(false);
+  };
+
   const username = 'Popescu Andrei';
-
   return (
-    <header className={styles.header}>
-      <div className="container">
-        <Logo variant="navbarLogo" />
+    <>
+      <header className={styles.header}>
+        <div className="container">
+          <Logo variant="navbarLogo" />
 
-        <div className={styles.userMenu}>
-          <span className={styles.username}>{username}</span>
-          <span className={styles.delimiter}></span>
-          <button className={styles.logOutBtn}>
-            <svg>
-              <use href={`${icons}#icon-exit`}></use>
-            </svg>
-          </button>
+          <div className={styles.userMenu}>
+            <span className={styles.username}>{username}</span>
+            <span className={styles.delimiter}></span>
+            <button
+              className={styles.logOutBtn}
+              onClick={() => setlogOutModalIsOpen(true)}
+            >
+              <svg>
+                <use href={`${icons}#icon-exit`}></use>
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {logOutModalIsOpen && <LogOutModal closeModal={closeModal} />}
+    </>
   );
 };
 

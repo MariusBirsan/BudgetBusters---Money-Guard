@@ -6,7 +6,8 @@ const Navigation = () => {
   return (
     <div className={styles.navigation}>
       <NavLink
-        to="home"
+        to="/dashboard"
+        end
         className={({ isActive }) =>
           isActive ? `${styles.navLink} ${styles.active}` : `${styles.navLink}`
         }
@@ -20,7 +21,7 @@ const Navigation = () => {
       </NavLink>
 
       <NavLink
-        to="statistics"
+        to="/dashboard/statistics"
         className={({ isActive }) =>
           isActive ? `${styles.navLink} ${styles.active}` : `${styles.navLink} `
         }
