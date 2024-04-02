@@ -4,8 +4,8 @@ import styles from './TransactionsTable.module.css';
 const TransactionsTable = ({ data }) => {
   return (
     <div className={styles.TransactionsTable}>
-      <table>
-        <thead>
+      <table className={styles.table}>
+        <thead className={styles.tableHead}>
           <tr>
             <th>Date</th>
             <th>Type</th>
