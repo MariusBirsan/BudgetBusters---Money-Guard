@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { expensesCategories } from '../../constants/expensesCategories';
 import styles from './AddTransactionForm.module.css';
+import { useDispatch } from 'react-redux';
+import { addTransactionThunk } from '../../redux/transactions/operations';
+import FormButton from 'components/common/FormButton/FormButton';
 
 const AddTransactionForm = () => {
+  const dispatch = useDispatch();
   const currentDate = new Date().toISOString().split('T')[0];
   const [transactionType, setTransactionType] = useState('expense');
   const [amount, setAmount] = useState('');
@@ -29,39 +33,30 @@ const AddTransactionForm = () => {
   const handleSubmit = async event => {
     event.preventDefault();
 
-    // Logica de trimitere a datelor la server:
+    // Logica de trimitere a datelor la server folosind Redux Thunk:
     const transactionData = {
       transactionDate: date,
       type: transactionType.toUpperCase(),
-      categoryId: category, // Use the category id
+      categoryId: category,
       comment: comment,
       amount: parseFloat(amount),
     };
 
     try {
-      const response = await fetch('/api/transactions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          // Add authorization header here if needed
-        },
-        body: JSON.stringify(transactionData),
-      });
+      // Dispatch către acțiunea addTransactionThunk și așteptarea rezultatului
+      await dispatch(addTransactionThunk(transactionData));
 
-      if (response.ok) {
-        // Transaction created successfully:
-        console.log('Transaction created successfully');
-        // Reset form fields:
-        setAmount('');
-        setDate('');
-        setComment('');
-        setCategory(''); // Reset to empty value
-      } else {
-        // Error creating transaction
-        console.error('Error creating transaction:', response.statusText);
-      }
+      // Dacă nu sunt erori, resetează formularul:
+      setAmount('');
+      setDate('');
+      setComment('');
+      setCategory('');
+
+      // Afiseaza un mesaj de succes
+      console.log('Transaction created successfully');
     } catch (error) {
-      console.error('Error creating transaction:', error);
+      // Dacă apare o eroare, afișează mesajul de eroare corespunzător
+      console.error('Error creating transaction:', error.message);
     }
   };
 
@@ -70,13 +65,6 @@ const AddTransactionForm = () => {
       prevType === 'income' ? 'expense' : 'income'
     );
   };
-
-  // const handleCancel = () => {
-  //   setAmount('');
-  //   setDate('');
-  //   setComment('');
-  //   setCategory('');
-  // };
 
   return (
     <form onSubmit={handleSubmit} className={styles['transaction-form']}>
@@ -87,24 +75,24 @@ const AddTransactionForm = () => {
       >
         Toggle transaction type
       </button>
-      {transactionType === 'expense' && (
-        <div>
-          <select
-            id="category"
-            value={category}
-            onChange={handleCategoryChange}
-            className={styles['select']}
-            placeholder="Category"
-          >
-            <option value="">Select a category</option> {/* Placeholder */}
-            {expensesCategories.map(category => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
+      <div>
+        <select
+          id="category"
+          value={category}
+          onChange={handleCategoryChange}
+          className={`${styles['select']} ${
+            transactionType === 'income' ? styles['hidden'] : ''
+          }`}
+          placeholder="Category"
+        >
+          <option value="">Select a category</option> {/* Placeholder */}
+          {expensesCategories.map(category => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </div>
       <div className={styles['form-row']}>
         <input
           type="number"
@@ -135,10 +123,13 @@ const AddTransactionForm = () => {
         />
       </div>
 
-      <div className={styles['button-row']}>
-        <button type="submit" className={styles['submit-button']}>
-          {transactionType === 'income' ? 'Add Income' : 'Add Expense'}
-        </button>
+      <div className={styles['submitButton']}>
+        <FormButton
+          type={'submit'}
+          text={transactionType === 'income' ? 'Add Income' : 'Add Expense'}
+          variant={'multiColorButtton'}
+          handlerFunction={handleSubmit}
+        />
       </div>
     </form>
   );

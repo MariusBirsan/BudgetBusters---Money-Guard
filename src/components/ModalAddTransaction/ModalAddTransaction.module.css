@@ -57,15 +57,6 @@
   margin-bottom: 20px;
 }
 
-.cancel-button {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #dc3545;
-  color: white;
-}
-
 .close-button:hover {
   color: darkmagenta;
 }

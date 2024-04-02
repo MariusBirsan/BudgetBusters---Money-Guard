@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import AddTransactionForm from '../AddTransactionForm/AddTransactionForm';
 import styles from './ModalAddTransaction.module.css';
 import { GrClose } from 'react-icons/gr';
+import FormButton from 'components/common/FormButton/FormButton';
 
 const ModalAddTransaction = ({ closeModal }) => {
   const onBackdropClick = e => {
@@ -39,13 +40,12 @@ const ModalAddTransaction = ({ closeModal }) => {
         </button>
         <h2 className={styles['title']}>Add transaction</h2>
         <AddTransactionForm />
-        <button
-          type="button"
-          onClick={closeModal}
-          className={styles['cancel-button']}
-        >
-          Cancel
-        </button>
+        <FormButton
+          type={'button'}
+          text={'cancel'}
+          variant={'whiteButtton'}
+          handlerFunction={closeModal}
+        />
       </div>
     </div>
   );

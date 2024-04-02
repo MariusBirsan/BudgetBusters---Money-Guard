@@ -60,9 +60,14 @@
   margin-bottom: 20px;
 }
 
-.submit-button {
-  background-color: #28a745;
-  color: white;
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.submitButton {
+  margin-bottom: 20px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -78,6 +83,7 @@
   }
 
   .input {
+    cursor: pointer;
     width: 181px;
   }
 
@@ -88,5 +94,10 @@
   .select,
   .textarea {
     width: 394px;
+  }
+  .hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
 }
