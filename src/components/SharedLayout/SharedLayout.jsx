@@ -1,6 +1,7 @@
-import Header from 'components/Header/Header';
-import { Outlet, useLocation } from 'react-router-dom';
 import styles from './SharedLayout.module.css';
+import { Outlet, useLocation } from 'react-router-dom';
+
+import Header from 'components/Header/Header';
 import Navigation from 'components/Navigation/Navigation';
 import Balance from 'components/Balance/Balance';
 
@@ -34,7 +35,7 @@ const SharedLayout = () => {
             {/* Todo: just for test */}
             {/* {screenCondition && <TestCurrencyGraph />} */}
           </div>
-          {/* todo : suspense */}
+
           <Outlet />
         </div>
       </section>

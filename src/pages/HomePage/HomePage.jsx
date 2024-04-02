@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
 
 import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAddTransactions';
 import ModalAddTransaction from 'components/ModalAddTransaction/ModalAddTransaction';
-import { logOut } from '../../redux/auth/authSlice';
 
 import TransactionsList from 'components/TransactionsList/TransactionsList';
 import TransactionsTable from 'components/TransactionsTable/TransactionsTable';
 import { useMediaQuery } from 'react-responsive';
 import styles from './HomePage.module.css';
+// import { selectIsLoading } from 'redux(rares)/auth/selectors';
 
 const HomePage = () => {
+  // const isLoading = useSelector(selectIsLoading);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -22,17 +21,6 @@ const HomePage = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-  };
-
-  const handleLogout = () => {
-    dispatch(logOut())
-      .unwrap()
-      .then(() => {
-        navigate('/login');
-      })
-      .catch(error => {
-        console.error('Logout failed:', error);
-      });
   };
 
   const screenCondition = useMediaQuery({ query: '(min-width: 768px)' });
@@ -69,6 +57,10 @@ const HomePage = () => {
     },
   ];
 
+  // if (isLoading) {
+  //   return <div>Aici vine loading screen ul</div>;
+  // }
+
   return (
     <div className={styles.HomePage}>
       {screenCondition ? (
@@ -76,7 +68,6 @@ const HomePage = () => {
       ) : (
         <TransactionsList data={data} />
       )}
-      <button onClick={handleLogout}>Logout</button>
 
       <ButtonAddTransactions onClick={openModal} />
       {isModalOpen && <ModalAddTransaction closeModal={closeModal} />}
