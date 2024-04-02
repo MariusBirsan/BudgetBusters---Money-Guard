@@ -50,7 +50,7 @@ const HomePage = () => {
     {
       id: '2',
       transactionDate: 'string',
-      type: 'INCOME',
+      type: 'EXPENSE',
       categoryId: 'string',
       userId: 'string',
       comment: 'string',
