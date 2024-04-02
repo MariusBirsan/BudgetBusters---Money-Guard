@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import axiosConfig from 'redux(rares)/axiosConfig';
+import axiosConfig from '../axiosConfig';
 
 /* Dan: Daca vrei sa testezi operatiile tale de trazactii: importa axiosConfig, (apeleaza
    functia: setAxiosBaseURL() ca pe linia 15. iar apoi, unde ai nevoie de autorizare (cred ca peste tot

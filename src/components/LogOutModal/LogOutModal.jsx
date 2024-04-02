@@ -5,7 +5,7 @@ import FormButton from 'components/common/FormButton/FormButton';
 import Logo from 'components/common/Logo/Logo';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { logOut } from 'redux(rares)/auth/operations';
+import { logOut } from '../../redux/auth/operations';
 
 const LogOutModal = ({ closeModal }) => {
   const dispatch = useDispatch();
