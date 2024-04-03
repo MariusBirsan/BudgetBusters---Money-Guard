@@ -9,8 +9,16 @@ import { useDispatch } from 'react-redux';
 import { register } from '../../redux/auth/operations';
 
 import icons from '../../images/icons/sprite.svg';
+import { useState } from 'react';
+import PasswordStrength from 'components/PasswordStrength/PasswordStrength';
 
 const RegistrationForm = () => {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -45,7 +53,7 @@ const RegistrationForm = () => {
     )
       .unwrap()
       .then(() => {
-        navigate('/dashboard');
+        // navigate('/dashboard');
       })
       .catch(error => {
         setStatus({ success: false, error: error });
@@ -86,8 +94,23 @@ const RegistrationForm = () => {
                 <use href={`${icons}#icon-password`}></use>
               </svg>
 
-              <Field type="text" name="password" placeholder="Password" />
+              <Field
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                placeholder="Password"
+                onKeyUp={e => setPassword(e.target.value)}
+              />
+              {password.length > 0 && <PasswordStrength password={password} />}
               <ErrorMessage name="password" component="div" />
+
+              {password.length > 0 && (
+                <span
+                  className={styles.passwordToggle}
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? '🙈' : '👁️'}
+                </span>
+              )}
             </div>
 
             <div className={styles.inputField}>
@@ -96,11 +119,21 @@ const RegistrationForm = () => {
               </svg>
 
               <Field
-                type="text"
+                type={showConfirmPassword ? 'text' : 'password'}
                 name="confirmPassword"
                 placeholder="Confirm password"
+                onKeyUp={e => setConfirmPassword(e.target.value)}
               />
               <ErrorMessage name="confirmPassword" component="div" />
+
+              {confirmPassword.length > 0 && (
+                <span
+                  className={styles.passwordToggle}
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {showConfirmPassword ? '🙈' : '👁️'}
+                </span>
+              )}
             </div>
 
             <div className={styles.buttonsWrapper}>

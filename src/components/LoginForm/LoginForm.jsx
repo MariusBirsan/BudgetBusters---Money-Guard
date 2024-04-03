@@ -9,8 +9,12 @@ import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/auth/operations';
 
 import icons from '../../images/icons/sprite.svg';
+import { useState } from 'react';
 
 const LoginForm = () => {
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -38,7 +42,7 @@ const LoginForm = () => {
     )
       .unwrap()
       .then(() => {
-        console.log('chestia din then: => login');
+        // console.log('chestia din then: => login');
       })
       .catch(error => {
         setStatus({ success: false, error: error });
@@ -71,8 +75,21 @@ const LoginForm = () => {
                 <use href={`${icons}#icon-password`}></use>
               </svg>
 
-              <Field type="text" name="password" placeholder="Password" />
+              <Field
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                placeholder="Password"
+                onKeyUp={e => setPassword(e.target.value)}
+              />
               <ErrorMessage name="password" component="div" />
+              {password.length > 0 && (
+                <span
+                  className={styles.passwordToggle}
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? '🙈' : '👁️'}
+                </span>
+              )}
             </div>
 
             <div className={styles.buttonsWrapper}>

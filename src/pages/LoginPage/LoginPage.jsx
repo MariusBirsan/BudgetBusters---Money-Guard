@@ -1,13 +1,25 @@
-import { useSelector } from 'react-redux';
 import styles from './LoginPage.module.css';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { selectIsLoading } from '../../redux/auth/selectors';
 import LoginForm from 'components/LoginForm/LoginForm';
+import LoadingScreen from 'components/common/LoadingScreen/LoadingScreen';
 
 const LoginPage = () => {
   const isLoading = useSelector(selectIsLoading);
 
+  const [forcedLoading, setForcedLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setForcedLoading(false), 3500);
+  }, [forcedLoading]);
+
+  if (forcedLoading) {
+    return <LoadingScreen text={'Loading page...'} />;
+  }
+
   if (isLoading) {
-    return <div>Aici vine loading screen ul...</div>;
+    return <LoadingScreen text={'Loading ...'} />;
   }
 
   return (
