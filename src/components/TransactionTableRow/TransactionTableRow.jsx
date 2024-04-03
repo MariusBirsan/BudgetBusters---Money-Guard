@@ -1,8 +1,11 @@
 import icons from '../../images/icons/sprite.svg';
+import React, { useState } from 'react';
 import styles from './TransactionTableRow.module.css';
+import ModalEditTransaction from '../ModalEditTransaction/ModalEditTransaction';
 
 const TransactionTableRow = ({ transaction }) => {
   const { type, categoryId, comment, amount } = transaction;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   let textClass = '';
 
@@ -12,6 +15,10 @@ const TransactionTableRow = ({ transaction }) => {
   } else if (type === 'EXPENSE') {
     textClass = styles.expenseText;
   }
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
 
   return (
     <tr className={styles.dataRow}>
@@ -23,11 +30,24 @@ const TransactionTableRow = ({ transaction }) => {
       <td className={styles.TransactionTableRow}>{comment}</td>
       <td className={`${styles.TransactionTableRow} ${textClass}`}>{amount}</td>
       <td className={styles.TransactionTableRow}>
-        <button className={styles.editButton} type="button">
+        {/* Butonul pentru deschiderea modalului */}
+        <button
+          className={styles.editButton}
+          type="button"
+          onClick={handleOpenModal}
+        >
           <svg className={styles.editIcon}>
             <use href={`${icons}#icon-edit`}></use>
           </svg>
         </button>
+
+        {/* Modalul pentru editarea tranzacției */}
+        {isModalOpen && (
+          <ModalEditTransaction
+            transaction={transaction}
+            closeModal={() => setIsModalOpen(false)} // Proprietate pentru închiderea modalului
+          />
+        )}
       </td>
       <td className={styles.TransactionTableRow}>
         <button type="button" className={styles.deleteButton}>
