@@ -1,13 +1,25 @@
 import styles from './RegisterPage.module.css';
-import RegisterForm from '../../components/RegistrationForm/RegistrationForm';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectIsLoading } from '../../redux/auth/selectors';
+import RegisterForm from '../../components/RegistrationForm/RegistrationForm';
+import LoadingScreen from 'components/common/LoadingScreen/LoadingScreen';
 
 const RegisterPage = () => {
   const isLoading = useSelector(selectIsLoading);
 
+  const [forcedLoading, setForcedLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setForcedLoading(false), 3500);
+  }, [forcedLoading]);
+
+  if (forcedLoading) {
+    return <LoadingScreen text={'Loading page...'} />;
+  }
+
   if (isLoading) {
-    return <div>Aici vine loading screen ul..</div>;
+    return <LoadingScreen text={'Loading ...'} />;
   }
 
   return (
