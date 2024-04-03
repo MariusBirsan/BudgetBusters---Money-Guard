@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import styles from './LoginPage.module.css';
-import { selectIsLoading } from 'redux(rares)/auth/selectors';
+import { selectIsLoading } from '../../redux/auth/selectors';
 import LoginForm from 'components/LoginForm/LoginForm';
 
 const LoginPage = () => {

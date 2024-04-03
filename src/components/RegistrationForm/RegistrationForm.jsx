@@ -6,7 +6,7 @@ import FormButton from 'components/common/FormButton/FormButton';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { register } from 'redux(rares)/auth/operations';
+import { register } from '../../redux/auth/operations';
 
 import icons from '../../images/icons/sprite.svg';
 

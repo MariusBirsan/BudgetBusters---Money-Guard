@@ -7,7 +7,6 @@ const setAxiosBaseURL = () => {
 const setAxiosHeader = () => {
   const savedDataLocal = JSON.parse(localStorage.getItem('persist:auth'));
 
-  debugger;
   const savedToken =
     savedDataLocal?.token === 'null'
       ? null
