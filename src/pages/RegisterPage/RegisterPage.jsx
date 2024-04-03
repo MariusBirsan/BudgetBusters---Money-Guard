@@ -1,7 +1,7 @@
 import styles from './RegisterPage.module.css';
 import RegisterForm from '../../components/RegistrationForm/RegistrationForm';
 import { useSelector } from 'react-redux';
-import { selectIsLoading } from 'redux(rares)/auth/selectors';
+import { selectIsLoading } from '../../redux/auth/selectors';
 
 const RegisterPage = () => {
   const isLoading = useSelector(selectIsLoading);

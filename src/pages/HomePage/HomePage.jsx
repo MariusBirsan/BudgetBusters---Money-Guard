@@ -8,7 +8,7 @@ import TransactionsList from 'components/TransactionsList/TransactionsList';
 import TransactionsTable from 'components/TransactionsTable/TransactionsTable';
 import { useMediaQuery } from 'react-responsive';
 import styles from './HomePage.module.css';
-// import { selectIsLoading } from 'redux(rares)/auth/selectors';
+// import { selectIsLoading } from '../../redux/auth/selectors';
 
 const HomePage = () => {
   // const isLoading = useSelector(selectIsLoading);

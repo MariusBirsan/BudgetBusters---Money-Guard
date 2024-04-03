@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import { useSelector } from 'react-redux';
-import { selectIsLoggedIn } from 'redux(rares)/auth/selectors';
+import { selectIsLoggedIn } from '../../redux/auth/selectors';
 
 const RestrictedLoginPage = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
