@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/BudgetBusters-MoneyGuard/static/css/main.4c3df2f0.css",
-    "main.js": "/BudgetBusters-MoneyGuard/static/js/main.3a8462dd.js",
+    "main.js": "/BudgetBusters-MoneyGuard/static/js/main.8b600869.js",
     "static/media/register-bg-d.jpg": "/BudgetBusters-MoneyGuard/static/media/register-bg-d.b2726011f970966c1ea4.jpg",
     "static/media/register-bg-t.jpg": "/BudgetBusters-MoneyGuard/static/media/register-bg-t.95cfec2a5fd44abe75ee.jpg",
     "static/media/login-bg-d.jpg": "/BudgetBusters-MoneyGuard/static/media/login-bg-d.1df976c5592680b269f7.jpg",
@@ -10,10 +10,10 @@
     "static/media/sprite.svg": "/BudgetBusters-MoneyGuard/static/media/sprite.bc338e4693af9445c769e130179d8a01.svg",
     "index.html": "/BudgetBusters-MoneyGuard/index.html",
     "main.4c3df2f0.css.map": "/BudgetBusters-MoneyGuard/static/css/main.4c3df2f0.css.map",
-    "main.3a8462dd.js.map": "/BudgetBusters-MoneyGuard/static/js/main.3a8462dd.js.map"
+    "main.8b600869.js.map": "/BudgetBusters-MoneyGuard/static/js/main.8b600869.js.map"
   },
   "entrypoints": [
     "static/css/main.4c3df2f0.css",
-    "static/js/main.3a8462dd.js"
+    "static/js/main.8b600869.js"
   ]
 }
