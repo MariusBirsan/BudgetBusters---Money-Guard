@@ -67,21 +67,24 @@ const AddTransactionForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles['transaction-form']}>
+    <form onSubmit={handleSubmit} className={styles.transactionForm}>
+      {/* TOGGLE BUTTON */}
       <button
         type="button"
         onClick={handleToggleTransactionType}
-        className={styles['toggle-button']}
+        className={styles.toggleButton}
       >
         Toggle transaction type
       </button>
+
+      {/* SELECT A CATEGORY */}
       <div>
         <select
           id="category"
           value={category}
           onChange={handleCategoryChange}
-          className={`${styles['select']} ${
-            transactionType === 'income' ? styles['hidden'] : ''
+          className={`${styles.select} ${
+            transactionType === 'income' && styles.hidden
           }`}
           placeholder="Category"
         >
@@ -93,37 +96,44 @@ const AddTransactionForm = () => {
           ))}
         </select>
       </div>
-      <div className={styles['form-row']}>
+
+      {/* AMOUNT */}
+      <div className={styles.formRow}>
         <input
           type="number"
           id="amount"
           value={amount}
           onChange={handleAmountChange}
           required
-          className={`${styles['input']} ${styles['amount-style']}`}
+          className={`${styles.input} ${styles.amountStyle}`}
           placeholder="0.00"
         />
+
+        {/* DATE */}
         <input
           type="date"
           id="date"
           value={date || currentDate} // Folosește data curentă sau valoarea din state
           onChange={handleDateChange}
           required
-          className={styles['input']}
+          className={styles.input}
           placeholder="Date"
         />
       </div>
+
+      {/* COMMENT */}
       <div>
         <textarea
           id="comment"
           value={comment}
           onChange={handleCommentChange}
-          className={styles['textarea']}
+          className={styles.textarea}
           placeholder="Comment"
         />
       </div>
 
-      <div className={styles['submitButton']}>
+      {/* ADD BUTTON */}
+      <div className={styles.submitButton}>
         <FormButton
           type={'submit'}
           text={transactionType === 'income' ? 'Add Income' : 'Add Expense'}
