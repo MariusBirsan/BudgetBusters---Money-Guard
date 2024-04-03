@@ -3,25 +3,32 @@ import Logo from 'components/common/Logo/Logo';
 import icons from '../../images/icons/sprite.svg';
 import { useState } from 'react';
 import LogOutModal from 'components/LogOutModal/LogOutModal';
-
-// todo: username (useSelector, *take it from email => splice: start, to chart: "@")
+import React from 'react';
+import { useAuth } from 'hooks';
+import { useMediaQuery } from 'react-responsive';
 
 const Header = () => {
   const [logOutModalIsOpen, setlogOutModalIsOpen] = useState(false);
-
   const closeModal = () => {
     setlogOutModalIsOpen(false);
   };
 
-  const username = 'Popescu Andrei';
+  const { user } = useAuth();
+  const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
+
   return (
     <>
       <header className={styles.header}>
         <div className="container">
           <Logo variant="navbarLogo" />
-
           <div className={styles.userMenu}>
-            <span className={styles.username}>{username}</span>
+            {isMobile ? (
+              <span className={styles.username}>
+                {user.email.split('@')[0]}
+              </span>
+            ) : (
+              <span className={styles.username}>{user.email}</span>
+            )}
             <span className={styles.delimiter}></span>
             <button
               className={styles.logOutBtn}
