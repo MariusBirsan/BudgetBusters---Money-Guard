@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { logOut } from '../redux/auth/authSlice';
 import { ButtonAddTransactions } from './ButtonAddTransactions/ButtonAddTransactions';
 
-import ModalAddTransaction from '../components/ModalAddTransaction/ModalAddTransaction';
+import ModalAddTransaction from './ModalAddTransaction/ModalAddTransaction';
 
 const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

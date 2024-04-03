@@ -1,0 +1,51 @@
+.section {
+  min-height: calc(100vh - 60.5px);
+
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  /* todo: problema aici cu valoarea bg */
+  background: linear-gradient(219.62deg, #6d54eb 28.31%, #652392 66.76%);
+}
+
+.sharedSectionElements .navAndBalanceContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    min-height: calc(100vh - 80px);
+  }
+
+  .sharedSectionElements {
+    display: flex;
+    gap: 32px;
+  }
+
+  .sharedSectionElements .navAndBalanceContainer {
+    gap: 28px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .sharedSectionElements {
+    display: inline-flex;
+    flex-direction: column;
+    width: 480px;
+    position: relative;
+  }
+
+  .sharedSectionElements::after {
+    content: '';
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 1px;
+    min-height: calc(100vh - 80px);
+    position: absolute;
+    top: -40px;
+    right: 0px;
+  }
+}

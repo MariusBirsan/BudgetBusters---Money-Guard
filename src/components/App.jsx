@@ -1,35 +1,39 @@
-//
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import RegisterForm from './authForm/RegisterForm';
-import LoginForm from './authForm/LoginForm';
-import HomePage from './HomePage';
-//import Navigation from './authForm/Navigation';
-import PrivateRoute from './authForm/PrivateRoute';
-import Currency from './Currency/Currency';
-//import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
+import Notify from './common/Notify/Notify';
+
+import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
+import SharedLayout from './SharedLayout/SharedLayout';
+
+import RestrictedLoginPage from 'pages/LoginPage/RestrictedLoginPage';
+import RestrictedRegisterPage from 'pages/RegisterPage/RestrictedRegisterPage';
+
+import RestrictedHomePage from 'pages/HomePage/RestrictedHomePage';
+import RestrictedStatisticsPage from 'pages/StatisticsPage/RestrictedStatisticsPage';
+import RestrictedCurrencyPage from 'pages/CurrencyPage/RestrictedCurrencyPage';
 
 const App = () => {
-  //const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const isOnMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
   return (
-    <div>
+    <>
       <Routes>
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<RegisterForm />} />
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <HomePage />
-              <Currency />
-            </PrivateRoute>
-          }
-        />
-        {/* Redirecționarea implicită către login pentru orice altă cale neidentificată */}
-        <Route path="*" element={<LoginForm />} />
+        <Route path="/" element={<RestrictedLoginPage />} />
+        <Route path="/register" element={<RestrictedRegisterPage />} />
+
+        <Route path="/dashboard" element={<SharedLayout />}>
+          <Route index element={<RestrictedHomePage />} />
+          <Route path="statistics" element={<RestrictedStatisticsPage />} />
+          {isOnMobile && (
+            <Route path="currency" element={<RestrictedCurrencyPage />} />
+          )}
+        </Route>
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </div>
+
+      <Notify />
+    </>
   );
 };
 
