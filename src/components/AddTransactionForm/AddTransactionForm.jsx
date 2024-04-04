@@ -183,6 +183,11 @@ const AddTransactionForm = () => {
           variant={'multiColorButtton'}
         />
       </div>
+
+      {/* Afiseaza mesajul de loading */}
+      {loading && <p>Loading...</p>}
+      {/* Afiseaza mesajul de eroare, daca exista */}
+      {error && <p>Error: {error}</p>}
     </form>
   );
 };
