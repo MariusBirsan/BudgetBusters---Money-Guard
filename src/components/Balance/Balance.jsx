@@ -1,9 +1,13 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectUserData } from '../../redux/auth/selectors';
 import styles from './Balance.module.css';
 
-// todo: balance value (useSelect, *toFixed())
-
 const Balance = () => {
-  const balanceValue = 2558;
+  const user = useSelector(selectUserData);
+
+  // Verifică dacă user există și are proprietatea balance:
+  const balanceValue = user && user.balance ? user.balance : 0;
 
   return (
     <div className={styles.balance}>
