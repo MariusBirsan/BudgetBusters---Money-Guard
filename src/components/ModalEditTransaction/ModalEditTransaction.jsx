@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import AddTransactionForm from '../AddTransactionForm/AddTransactionForm';
-import styles from './ModalAddTransaction.module.css';
+import EditTransactionForm from '../EditTransactionForm/EditTransactionForm';
+import styles from './ModalEditTransaction.module.css';
 import { GrClose } from 'react-icons/gr';
 import FormButton from 'components/common/FormButton/FormButton';
 
-const ModalAddTransaction = ({ closeModal }) => {
+const ModalEditTransaction = ({ closeModal }) => {
   const onBackdropClick = e => {
     if (e.target === e.currentTarget) {
       closeModal(); // Close the modal if the click is made on the modal background
@@ -46,8 +46,9 @@ const ModalAddTransaction = ({ closeModal }) => {
         <button className={styles['close-button']} onClick={closeModal}>
           <GrClose />
         </button>
-        <h2 className={styles['title']}>Add transaction</h2>
-        <AddTransactionForm />
+        <h2 className={styles['title']}>Edit transaction</h2>
+        <EditTransactionForm />
+        {/* CANCEL BUTTON */}
         <FormButton
           type={'button'}
           text={'cancel'}
@@ -59,4 +60,4 @@ const ModalAddTransaction = ({ closeModal }) => {
   );
 };
 
-export default ModalAddTransaction;
+export default ModalEditTransaction;
