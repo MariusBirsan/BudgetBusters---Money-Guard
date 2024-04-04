@@ -5,7 +5,6 @@ import { useState } from 'react';
 import LogOutModal from 'components/LogOutModal/LogOutModal';
 import React from 'react';
 import { useAuth } from 'hooks';
-import { useMediaQuery } from 'react-responsive';
 
 const Header = () => {
   const [logOutModalIsOpen, setlogOutModalIsOpen] = useState(false);
@@ -14,7 +13,6 @@ const Header = () => {
   };
 
   const { user } = useAuth();
-  const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 
   return (
     <>
@@ -22,13 +20,7 @@ const Header = () => {
         <div className="container">
           <Logo variant="navbarLogo" />
           <div className={styles.userMenu}>
-            {isMobile ? (
-              <span className={styles.username}>
-                {user.email.split('@')[0]}
-              </span>
-            ) : (
-              <span className={styles.username}>{user.email}</span>
-            )}
+            <span className={styles.username}>{user.username}</span>
             <span className={styles.delimiter}></span>
             <button
               className={styles.logOutBtn}
