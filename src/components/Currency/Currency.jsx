@@ -1,3 +1,4 @@
+import styles from './Currency.module.css';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
@@ -37,10 +38,10 @@ const Currency = () => {
     }
   }, []);
 
-  const rateUSD = data?.rates['USD'];
+  const rateGBP = data?.rates['GBP'];
   const rateEUR = data?.rates['EUR'];
-  const rateBuyUSD = rateUSD ? rateUSD.toFixed(2) : 'N/A';
-  const rateSellUSD = rateUSD ? (1 / rateUSD).toFixed(2) : 'N/A';
+  const rateBuyGBP = rateGBP ? rateGBP.toFixed(2) : 'N/A';
+  const rateSellGBP = rateGBP ? (1 / rateGBP).toFixed(2) : 'N/A';
   const rateBuyEUR = rateEUR ? rateEUR.toFixed(2) : 'N/A';
   const rateSellEUR = rateEUR ? (1 / rateEUR).toFixed(2) : 'N/A';
 
@@ -59,32 +60,33 @@ const Currency = () => {
   });
 
   return (
-    <div>
-      <table>
-        <thead>
+    <div className={styles.tablewrapper}>
+      <table className={styles.table}>
+        <thead className={styles.tablehead}>
           <tr>
-            <th>Currency</th>
-            <th>Purchase</th>
-            <th>Sale</th>
+            <th className={styles.tableheader}>Currency</th>
+            <th className={styles.tableheader}>Purchase</th>
+            <th className={styles.tableheader}>Sale</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>USD</td>
-            <td>{rateBuyUSD}</td>
-            <td>{rateSellUSD}</td>
+            <td className={styles.tabledata}>GBP</td>
+            <td className={styles.tabledata}>{rateBuyGBP}</td>
+            <td className={styles.tabledata}>{rateSellGBP}</td>
           </tr>
           <tr>
-            <td>EUR</td>
-            <td>{rateBuyEUR}</td>
-            <td>{rateSellEUR}</td>
+            <td className={styles.tabledata}>EUR</td>
+            <td className={styles.tabledata}>{rateBuyEUR}</td>
+            <td className={styles.tabledata}>{rateSellEUR}</td>
           </tr>
         </tbody>
       </table>
 
       {isMobile ? (
-        <div>
+        <div className={styles.tablegraph}>
           <svg
+            className={styles.svg}
             xmlns="http://www.w3.org/2000/svg"
             width="320"
             height="72"
@@ -97,6 +99,7 @@ const Currency = () => {
             />
           </svg>
           <svg
+            className={styles.svggradient}
             xmlns="http://www.w3.org/2000/svg"
             width="320"
             height="88"
@@ -147,8 +150,9 @@ const Currency = () => {
         ''
       )}
       {isMinTablet & isMaxTablet ? (
-        <div>
+        <div className={styles.tablegraph}>
           <svg
+            className={styles.svg}
             xmlns="http://www.w3.org/2000/svg"
             width="338"
             height="72"
@@ -161,6 +165,7 @@ const Currency = () => {
             />
           </svg>
           <svg
+            className={styles.svggradient}
             xmlns="http://www.w3.org/2000/svg"
             width="336"
             height="88"
@@ -211,10 +216,11 @@ const Currency = () => {
         ''
       )}
       {isDesktop ? (
-        <div usd={rateBuyUSD}>
-          <div>{rateBuyUSD}</div>
-          <div>{rateBuyEUR}</div>
+        <div className={styles.tablegraph} gbp={rateBuyGBP}>
+          <div className={styles.gbp}>{rateBuyGBP}</div>
+          <div className={styles.eur}>{rateBuyEUR}</div>
           <svg
+            className={styles.svg}
             xmlns="http://www.w3.org/2000/svg"
             width="480"
             height="102"
@@ -227,6 +233,7 @@ const Currency = () => {
             />
           </svg>
           <svg
+            className={styles.svggradient}
             xmlns="http://www.w3.org/2000/svg"
             width="480"
             height="167"
