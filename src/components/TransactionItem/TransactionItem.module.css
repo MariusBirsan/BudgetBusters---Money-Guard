@@ -47,6 +47,13 @@
   cursor: pointer;
 }
 
+.editText {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  color: rgba(255, 255, 255, 0.6);
+}
+
 .editIcon {
   width: 14px;
   height: 14px;
@@ -56,15 +63,11 @@
 }
 
 .editButton:hover .editIcon {
-  color: #7000ff;
   stroke: #7000ff;
 }
 
-.editText {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  color: rgba(255, 255, 255, 0.6);
+.editButton:hover .editText {
+  color: #7000ff;
 }
 
 .fixData {
