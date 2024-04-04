@@ -2,10 +2,12 @@ import icons from '../../images/icons/sprite.svg';
 import React, { useState } from 'react';
 import styles from './TransactionTableRow.module.css';
 import ModalEditTransaction from '../ModalEditTransaction/ModalEditTransaction';
+import ModalDeleteTransaction from '../ModalDeleteTransaction/ModalDeleteTransaction';
 
 const TransactionTableRow = ({ transaction }) => {
   const { type, categoryId, comment, amount } = transaction;
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Stare pentru modalul de editare
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Stare pentru modalul de ștergere
 
   let textClass = '';
 
@@ -16,8 +18,12 @@ const TransactionTableRow = ({ transaction }) => {
     textClass = styles.expenseText;
   }
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
+  const handleOpenEditModal = () => {
+    setIsEditModalOpen(true);
+  };
+
+  const handleOpenDeleteModal = () => {
+    setIsDeleteModalOpen(true);
   };
 
   return (
@@ -30,11 +36,11 @@ const TransactionTableRow = ({ transaction }) => {
       <td className={styles.TransactionTableRow}>{comment}</td>
       <td className={`${styles.TransactionTableRow} ${textClass}`}>{amount}</td>
       <td className={styles.TransactionTableRow}>
-        {/* Butonul pentru deschiderea modalului */}
+        {/* Butonul pentru deschiderea modalului de editare */}
         <button
           className={styles.editButton}
           type="button"
-          onClick={handleOpenModal}
+          onClick={handleOpenEditModal}
         >
           <svg className={styles.editIcon}>
             <use href={`${icons}#icon-edit`}></use>
@@ -42,17 +48,30 @@ const TransactionTableRow = ({ transaction }) => {
         </button>
 
         {/* Modalul pentru editarea tranzacției */}
-        {isModalOpen && (
+        {isEditModalOpen && (
           <ModalEditTransaction
             transaction={transaction}
-            closeModal={() => setIsModalOpen(false)} // Proprietate pentru închiderea modalului
+            closeModal={() => setIsEditModalOpen(false)} // Proprietate pentru închiderea modalului
           />
         )}
       </td>
       <td className={styles.TransactionTableRow}>
-        <button type="button" className={styles.deleteButton}>
+        {/* Butonul pentru deschiderea modalului de ștergere */}
+        <button
+          className={styles.deleteButton}
+          type="button"
+          onClick={handleOpenDeleteModal}
+        >
           Delete
         </button>
+
+        {/* Modalul pentru ștergerea tranzacției */}
+        {isDeleteModalOpen && (
+          <ModalDeleteTransaction
+            transaction={transaction}
+            closeModal={() => setIsDeleteModalOpen(false)} // Proprietate pentru închiderea modalului
+          />
+        )}
       </td>
     </tr>
   );
