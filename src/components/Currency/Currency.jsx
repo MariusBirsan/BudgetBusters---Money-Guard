@@ -211,7 +211,7 @@ const Currency = () => {
         ''
       )}
       {isDesktop ? (
-        <div $usd={rateBuyUSD}>
+        <div usd={rateBuyUSD}>
           <div>{rateBuyUSD}</div>
           <div>{rateBuyEUR}</div>
           <svg
