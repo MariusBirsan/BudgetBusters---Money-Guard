@@ -7,6 +7,7 @@ import TransactionsList from 'components/TransactionsList/TransactionsList';
 import TransactionsTable from 'components/TransactionsTable/TransactionsTable';
 import { useMediaQuery } from 'react-responsive';
 import styles from './HomePage.module.css';
+import Test from 'components/Test';
 
 const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -53,6 +54,8 @@ const HomePage = () => {
       ) : (
         <TransactionsList data={data} />
       )}
+
+      <Test />
 
       <ButtonAddTransactions onClick={() => setIsModalOpen(true)} />
       {isModalOpen && (
