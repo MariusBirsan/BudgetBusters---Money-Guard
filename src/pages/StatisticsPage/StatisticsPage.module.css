@@ -1,0 +1,77 @@
+/* StatisticsPage.module.css */
+.statisticsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0 50px 0;
+}
+.titleandchart {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.title {
+  width: 135px;
+  height: 45px;
+  top: 156px;
+  left: 20px;
+  font-family: Poppins;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 45px;
+  text-align: center;
+  color: #fbfbfb;
+}
+.chartContainer {
+  width: 280px;
+  height: 333px;
+  top: 156px;
+  left: 20px;
+  border: 0;
+  margin: auto;
+}
+
+.chartDashboardContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.tableContainer {
+  margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+  /* Tableta și desktop */
+  .statisticsContainer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .chartContainer {
+    width: 336px;
+    height: 336px;
+    top: 379px;
+    left: 32px;
+  }
+  .chartDashboardContainer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .tableContainer {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .statisticsContainer {
+    display: inline-flex;
+    justify-content: center;
+  }
+  .chartContainer {
+    width: 288px;
+    height: 288px;
+    top: 177px;
+    left: 549px;
+  }
+}

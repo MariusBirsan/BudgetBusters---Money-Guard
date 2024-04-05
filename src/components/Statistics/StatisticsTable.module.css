@@ -1,0 +1,56 @@
+.text {
+  color: rgba(251, 251, 251, 1);
+}
+.totalTable {
+  display: flex;
+  flex-direction: column;
+}
+.type {
+  display: flex;
+  justify-content: space-between;
+}
+.label {
+  width: 70px;
+  height: 21px;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-align: left;
+  color: rgba(251, 251, 251, 1);
+}
+
+.totalIncome {
+  width: 68px;
+  height: 21px;
+  top: 1210px;
+  left: 215px;
+  gap: 0px;
+  opacity: 0px;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-align: right;
+  color: rgba(255, 134, 141, 1);
+}
+.totalExpense {
+  width: 68px;
+  height: 21px;
+  top: 1247px;
+  left: 215px;
+  gap: 0px;
+  opacity: 0px;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-align: right;
+  color: rgba(255, 182, 39, 1);
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 1280px) {
+}
