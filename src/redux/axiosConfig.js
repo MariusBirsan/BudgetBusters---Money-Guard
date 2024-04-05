@@ -17,7 +17,7 @@ const setAxiosHeader = tokenReceived => {
 };
 
 const clearAxiosHeader = () => {
-  axios.defaults.headers.common.Authorization = null;
+  delete axios.defaults.headers.common.Authorization;
 };
 
 const axiosConfig = {

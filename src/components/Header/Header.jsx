@@ -3,25 +3,24 @@ import Logo from 'components/common/Logo/Logo';
 import icons from '../../images/icons/sprite.svg';
 import { useState } from 'react';
 import LogOutModal from 'components/LogOutModal/LogOutModal';
-
-// todo: username (useSelector, *take it from email => splice: start, to chart: "@")
+import React from 'react';
+import { useAuth } from 'hooks';
 
 const Header = () => {
   const [logOutModalIsOpen, setlogOutModalIsOpen] = useState(false);
-
   const closeModal = () => {
     setlogOutModalIsOpen(false);
   };
 
-  const username = 'Popescu Andrei';
+  const { user } = useAuth();
+
   return (
     <>
       <header className={styles.header}>
         <div className="container">
           <Logo variant="navbarLogo" />
-
           <div className={styles.userMenu}>
-            <span className={styles.username}>{username}</span>
+            <span className={styles.username}>{user.username}</span>
             <span className={styles.delimiter}></span>
             <button
               className={styles.logOutBtn}

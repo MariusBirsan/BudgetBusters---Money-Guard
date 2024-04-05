@@ -7,6 +7,7 @@ import TransactionsList from 'components/TransactionsList/TransactionsList';
 import TransactionsTable from 'components/TransactionsTable/TransactionsTable';
 import { useMediaQuery } from 'react-responsive';
 import styles from './HomePage.module.css';
+
 import ModalAddTransactionNew from 'components/ModalAddTransactionNew/ModalAddTransactionNew';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAllTransactions } from '../../redux/transactions/selectors';
@@ -65,6 +66,8 @@ const HomePage = () => {
       ) : (
         <TransactionsList data={data} />
       )}
+
+      <Test />
 
       <ButtonAddTransactions onClick={() => setIsModalOpen(true)} />
       {/* {isModalOpen && (

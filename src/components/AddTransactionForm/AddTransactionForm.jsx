@@ -1,19 +1,36 @@
-import { useState } from 'react';
-import { expensesCategories } from '../../constants/TransactionCategories';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import axiosConfig from '../../redux/axiosConfig';
 import styles from './AddTransactionForm.module.css';
-import { useDispatch } from 'react-redux';
-
 import FormButton from 'components/common/FormButton/FormButton';
-import { addTransaction } from '../../redux/transactions/operations';
 
 const AddTransactionForm = () => {
-  const dispatch = useDispatch();
   const currentDate = new Date().toISOString().split('T')[0];
   const [transactionType, setTransactionType] = useState('expense');
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState('');
   const [comment, setComment] = useState('');
   const [category, setCategory] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [expenseCategories, setExpenseCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchExpenseCategories = async () => {
+      try {
+        axiosConfig.setAxiosBaseURL();
+        axiosConfig.setAxiosHeader();
+        const response = await axios.get('/api/transaction-categories');
+        setExpenseCategories(response.data);
+      } catch (error) {
+        console.error('Error fetching expense categories:', error);
+      } finally {
+        axiosConfig.clearAxiosHeader();
+      }
+    };
+
+    fetchExpenseCategories();
+  }, []);
 
   const handleAmountChange = event => {
     setAmount(event.target.value);
@@ -31,34 +48,59 @@ const AddTransactionForm = () => {
     setCategory(event.target.value);
   };
 
+  const resetForm = () => {
+    setAmount('');
+    setDate('');
+    setComment('');
+    setCategory('');
+  };
+
   const handleSubmit = async event => {
     event.preventDefault();
 
-    // Logica de trimitere a datelor la server folosind Redux Thunk:
+    // Verificați dacă data este goală sau nedefinită și setați-o la currentDate dacă este cazul
+    let adjustedDate = date || currentDate;
+
+    // Verificăm dacă date este o valoare validă de tip data ISO 8601
+    if (!isIso8601Date(adjustedDate)) {
+      console.error('Invalid ISO 8601 date format:', adjustedDate);
+      return; // Ieșiți din funcție sau tratați eroarea în alt mod
+    }
+
+    // Continuați cu logica existentă pentru trimiterea cererii către server
+    let transactionAmount = parseFloat(amount);
+    if (transactionType === 'expense') {
+      transactionAmount = -Math.abs(transactionAmount);
+    }
+
     const transactionData = {
-      transactionDate: date,
+      transactionDate: adjustedDate,
       type: transactionType.toUpperCase(),
       categoryId: category,
       comment: comment,
-      amount: parseFloat(amount),
+      amount: transactionAmount,
     };
 
     try {
-      // Dispatch către acțiunea addTransactionThunk și așteptarea rezultatului
-      await dispatch(addTransaction(transactionData));
-
-      // Dacă nu sunt erori, resetează formularul:
-      setAmount('');
-      setDate('');
-      setComment('');
-      setCategory('');
-
-      // Afiseaza un mesaj de succes
+      setLoading(true);
+      axiosConfig.setAxiosBaseURL();
+      axiosConfig.setAxiosHeader();
+      await axios.post('/api/transactions', transactionData);
+      setLoading(false);
+      resetForm();
       console.log('Transaction created successfully');
     } catch (error) {
-      // Dacă apare o eroare, afișează mesajul de eroare corespunzător
+      setLoading(false);
+      setError(error.message);
       console.error('Error creating transaction:', error.message);
+    } finally {
+      axiosConfig.clearAxiosHeader();
     }
+  };
+
+  // Funcție pentru a verifica dacă o valoare este în formatul corect de tip data ISO 8601
+  const isIso8601Date = date => {
+    return /\d{4}-\d{2}-\d{2}/.test(date);
   };
 
   const handleToggleTransactionType = () => {
@@ -68,70 +110,84 @@ const AddTransactionForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles['transaction-form']}>
+    <form onSubmit={handleSubmit} className={styles.transactionForm}>
+      {/* TOGGLE BUTTON */}
       <button
         type="button"
         onClick={handleToggleTransactionType}
-        className={styles['toggle-button']}
+        className={styles.toggleButton}
       >
         Toggle transaction type
       </button>
+
+      {/* SELECT A CATEGORY */}
       <div>
         <select
           id="category"
           value={category}
           onChange={handleCategoryChange}
-          className={`${styles['select']} ${
-            transactionType === 'income' ? styles['hidden'] : ''
+          className={`${styles.select} ${
+            transactionType === 'income' && styles.hidden
           }`}
           placeholder="Category"
         >
           <option value="">Select a category</option> {/* Placeholder */}
-          {expensesCategories.map(category => (
+          {expenseCategories.map(category => (
             <option key={category.id} value={category.id}>
               {category.name}
             </option>
           ))}
         </select>
       </div>
-      <div className={styles['form-row']}>
+
+      {/* AMOUNT */}
+      <div className={styles.formRow}>
         <input
           type="number"
           id="amount"
           value={amount}
           onChange={handleAmountChange}
           required
-          className={`${styles['input']} ${styles['amount-style']}`}
+          className={`${styles.input} ${styles.amountStyle}`}
           placeholder="0.00"
         />
+
+        {/* DATE */}
         <input
           type="date"
           id="date"
           value={date || currentDate} // Folosește data curentă sau valoarea din state
           onChange={handleDateChange}
           required
-          className={styles['input']}
+          className={styles.input}
           placeholder="Date"
         />
       </div>
+
+      {/* COMMENT */}
       <div>
         <textarea
           id="comment"
           value={comment}
           onChange={handleCommentChange}
-          className={styles['textarea']}
+          className={styles.textarea}
           placeholder="Comment"
         />
       </div>
 
-      <div className={styles['submitButton']}>
+      {/* ADD BUTTON */}
+      <div className={styles.submitButton}>
         <FormButton
           type={'submit'}
           text={transactionType === 'income' ? 'Add Income' : 'Add Expense'}
           variant={'multiColorButtton'}
-          handlerFunction={handleSubmit}
         />
       </div>
+
+      {/* Afiseaza mesajul de loading */}
+      {loading && <p>Loading...</p>}
+      {/* Afiseaza mesajul de eroare, daca exista */}
+      {error && <p>Error: {error}</p>}
     </form>
   );
 };
