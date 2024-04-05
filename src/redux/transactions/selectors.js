@@ -1,7 +1,10 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-// Selector pentru a obține toate tranzacțiile din starea Redux:
-export const selectTransactions = state => state.transactions.transactions;
+const selectAllTransactions = state => state.transactions.items;
+
+export { selectAllTransactions };
+
+// De continuat de aici, in jos//
 
 // Selector pentru a obține toate categoriile din starea Redux:
 export const selectCategories = state => state.transactions.categories;
@@ -15,35 +18,35 @@ export const selectFilteredCategories = createSelector(
 );
 
 // Selector pentru a sorta tranzacțiile după data tranzacției:
-export const selectSortedTransactions = createSelector(
-  [selectTransactions],
-  transactions => {
-    return transactions
-      .slice()
-      .sort(
-        (a, b) => new Date(b.transactionDate) - new Date(a.transactionDate)
-      );
-  }
-);
+// export const selectSortedTransactions = createSelector(
+//   [selectTransactions],
+//   transactions => {
+//     return transactions
+//       .slice()
+//       .sort(
+//         (a, b) => new Date(b.transactionDate) - new Date(a.transactionDate)
+//       );
+//   }
+// );
 
 // Selector pentru a obține suma totală a tranzacțiilor de tip venit:
-export const selectTotalIncome = createSelector(
-  [selectTransactions],
-  transactions => {
-    return transactions.reduce((total, transaction) => {
-      return transaction.type === 'INCOME' ? total + transaction.amount : total;
-    }, 0);
-  }
-);
+// export const selectTotalIncome = createSelector(
+//   [selectTransactions],
+//   transactions => {
+//     return transactions.reduce((total, transaction) => {
+//       return transaction.type === 'INCOME' ? total + transaction.amount : total;
+//     }, 0);
+//   }
+// );
 
 // Selector pentru a obține suma totală a tranzacțiilor de tip cheltuială:
-export const selectTotalExpenses = createSelector(
-  [selectTransactions],
-  transactions => {
-    return transactions.reduce((total, transaction) => {
-      return transaction.type === 'EXPENSE'
-        ? total + transaction.amount
-        : total;
-    }, 0);
-  }
-);
+// export const selectTotalExpenses = createSelector(
+//   [selectTransactions],
+//   transactions => {
+//     return transactions.reduce((total, transaction) => {
+//       return transaction.type === 'EXPENSE'
+//         ? total + transaction.amount
+//         : total;
+//     }, 0);
+//   }
+// );

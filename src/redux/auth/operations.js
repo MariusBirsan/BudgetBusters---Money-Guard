@@ -3,15 +3,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import axiosConfig from '../axiosConfig';
 
-/* Dan: Daca vrei sa testezi operatiile tale de trazactii: importa axiosConfig, (apeleaza
-   functia: setAxiosBaseURL() ca pe linia 15. iar apoi, unde ai nevoie de autorizare (cred ca peste tot
-    in toate functiile), acolo trebuie sa aplezi si functia: axiosConfig.setAxiosHeader() (*ca pe 
-    linia 54) )
-
-    PS: pe partea de tranzactii nu am facut nimic, poti sa muti tu logica si sa redenumesti folder 
-    contacts, in transactions. Dupa vezi sa il conectezi la store  (sa fie importul facut la noul folder)
-*/
-
 axiosConfig.setAxiosBaseURL();
 
 const register = createAsyncThunk(
@@ -37,6 +28,7 @@ const register = createAsyncThunk(
 const logIn = createAsyncThunk('auth/login', async (userData, thunkAPI) => {
   try {
     const response = await axios.post('/api/auth/sign-in', { ...userData });
+    axiosConfig.setAxiosHeader(response.data.token);
 
     toast.success('Logged in successfully !');
     return response.data;
@@ -51,8 +43,6 @@ const logIn = createAsyncThunk('auth/login', async (userData, thunkAPI) => {
 });
 
 const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
-  axiosConfig.setAxiosHeader();
-
   try {
     await axios.delete('/api/auth/sign-out');
 
