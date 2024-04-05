@@ -1,20 +1,59 @@
+import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosConfig from '../axiosConfig';
+import { toast } from 'react-toastify';
 
 axiosConfig.setAxiosBaseURL();
+axiosConfig.setAxiosHeader();
 
-export const addTransactionThunk = createAsyncThunk(
-  'transactions/add',
+// *Add transaction //
+const addTransaction = createAsyncThunk(
+  'transactions/addTransaction',
+
   async (transactionData, thunkAPI) => {
     axiosConfig.setAxiosHeader();
+
     try {
-      const response = await axiosConfig.post('/transactions', transactionData);
+      const response = await axios.post('/api/transactions', transactionData);
+
+      toast.success('Transaction added successfully !');
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
+      const errorNotify =
+        error.response.data.message ??
+        `Operation failed and transaction not saved. We are facing some technical problems with our servers ! `;
+
+      toast.error(errorNotify);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
+
+// *Get all transaction //
+
+const fetchAllTransactions = createAsyncThunk(
+  'transactions/fetchAllTransaction',
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get('/api/transactions');
+      toast.info(`You have ${response.data.length} transactions in your list`);
+
+      // todo: mesaj cu nu ai nicio tranzactie in lista
+      return response.data;
+    } catch (error) {
+      const errorNotify =
+        error.response.data.message ??
+        `Operation failed and transaction not saved. We are facing some technical problems with our servers ! `;
+
+      toast.error(errorNotify);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export { addTransaction, fetchAllTransactions };
+
+// todo: de continuat de aici, in jos //
 
 export const getAllTransactionsThunk = createAsyncThunk(
   'transactions/getAll',
@@ -27,6 +66,7 @@ export const getAllTransactionsThunk = createAsyncThunk(
       console.log('Datele din API:', response.data);
       return response.data;
     } catch (error) {
+      debugger;
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }

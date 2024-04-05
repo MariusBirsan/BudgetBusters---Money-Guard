@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { expensesCategories } from '../../constants/expensesCategories';
+import { useState } from 'react';
+import { expensesCategories } from '../../constants/TransactionCategories';
 import styles from './AddTransactionForm.module.css';
 import { useDispatch } from 'react-redux';
-import { addTransactionThunk } from '../../redux/transactions/operations';
+
 import FormButton from 'components/common/FormButton/FormButton';
+import { addTransaction } from '../../redux/transactions/operations';
 
 const AddTransactionForm = () => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const AddTransactionForm = () => {
 
     try {
       // Dispatch către acțiunea addTransactionThunk și așteptarea rezultatului
-      await dispatch(addTransactionThunk(transactionData));
+      await dispatch(addTransaction(transactionData));
 
       // Dacă nu sunt erori, resetează formularul:
       setAmount('');

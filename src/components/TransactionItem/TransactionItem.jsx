@@ -1,8 +1,12 @@
 import styles from './TransactionItem.module.css';
 import icons from '../../images/icons/sprite.svg';
+import {
+  formatData,
+  getTransactionCategory,
+} from 'constants/TransactionCategories';
 
 const TransactionItem = ({ transaction }) => {
-  const { type, categoryId, comment, amount } = transaction;
+  const { type, categoryId, comment, amount, transactionDate } = transaction;
 
   let textClass = '';
 
@@ -18,16 +22,18 @@ const TransactionItem = ({ transaction }) => {
       <div className={`${styles.row} ${styles.firstRow}`}>
         <span className={styles.fixData}>Date</span>
         <span className={styles.dynamicData}>
-          {transaction.transactionDate}
+          {formatData(transactionDate)}
         </span>
       </div>
       <div className={`${styles.row} ${styles.secondRow}`}>
-        <span className={styles.fixData}>Type</span>
+        <span className={styles.fixData}>{type === 'INCOME' ? '+' : '-'}</span>
         <span className={styles.dynamicData}>{type}</span>
       </div>
       <div className={`${styles.row} ${styles.thirdRow}`}>
         <span className={styles.fixData}>Category</span>
-        <span className={styles.dynamicData}>{categoryId}</span>
+        <span className={styles.dynamicData}>
+          {getTransactionCategory(categoryId)}
+        </span>
       </div>
       <div className={`${styles.row} ${styles.forthRow}`}>
         <span className={styles.fixData}>Comment</span>

@@ -1,8 +1,12 @@
+import {
+  formatData,
+  getTransactionCategory,
+} from 'constants/TransactionCategories';
 import icons from '../../images/icons/sprite.svg';
 import styles from './TransactionTableRow.module.css';
 
 const TransactionTableRow = ({ transaction }) => {
-  const { type, categoryId, comment, amount } = transaction;
+  const { type, categoryId, comment, amount, transactionDate } = transaction;
 
   let textClass = '';
 
@@ -16,10 +20,14 @@ const TransactionTableRow = ({ transaction }) => {
   return (
     <tr className={styles.dataRow}>
       <td className={styles.TransactionTableRow}>
-        {transaction.transactionDate}
+        {formatData(transactionDate)}
       </td>
-      <td className={styles.TransactionTableRow}>{type}</td>
-      <td className={styles.TransactionTableRow}>{categoryId}</td>
+      <td className={styles.TransactionTableRow}>
+        {type === 'INCOME' ? '+' : '-'}
+      </td>
+      <td className={styles.TransactionTableRow}>
+        {getTransactionCategory(categoryId)}
+      </td>
       <td className={styles.TransactionTableRow}>{comment}</td>
       <td className={`${styles.TransactionTableRow} ${textClass}`}>{amount}</td>
       <td className={styles.TransactionTableRow}>

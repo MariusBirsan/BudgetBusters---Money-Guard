@@ -1,8 +1,9 @@
 .section {
-  min-height: calc(100vh - 60.5px);
+  min-height: 100vh;
 
-  padding-top: 15px;
+  padding-top: 75px;
   padding-bottom: 15px;
+  overflow: hidden;
 
   /* todo: problema aici cu valoarea bg */
   background: linear-gradient(219.62deg, #6d54eb 28.31%, #652392 66.76%);

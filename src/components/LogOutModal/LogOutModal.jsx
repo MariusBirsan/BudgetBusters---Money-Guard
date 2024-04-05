@@ -11,12 +11,17 @@ const LogOutModal = ({ closeModal }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
+  useEffect(() => {
     const addCloseEvent = event => {
       event.key === 'Escape' && closeModal();
     };
-
     document.addEventListener('keydown', addCloseEvent);
-
     return () => {
       document.removeEventListener('keydown', addCloseEvent);
     };
@@ -29,10 +34,7 @@ const LogOutModal = ({ closeModal }) => {
   const screenCondition = useMediaQuery({ query: '(min-width: 768px)' });
 
   return (
-    <div
-      className={`${styles.test} ${styles.logOutModal}`}
-      onClick={closeOnClickOutside}
-    >
+    <div className={styles.logOutModal} onClick={closeOnClickOutside}>
       <div className={styles.modalBg}>
         <div className={styles.modalContent}>
           {screenCondition && <Logo variant={'formLogo'} />}

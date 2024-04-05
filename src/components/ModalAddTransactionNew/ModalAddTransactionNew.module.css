@@ -1,4 +1,4 @@
-.logOutModal {
+.addModal {
   position: fixed;
   top: 0;
   left: 0;
@@ -6,7 +6,7 @@
   height: 100vh;
   width: 100%;
 
-  z-index: 150;
+  z-index: 100;
 
   /* transform: scale(0.5);
   transition: all 0.35s ease-in-out; */
@@ -36,31 +36,10 @@
   overflow: hidden;
 }
 
-.modalContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-}
-
-.modalContent p {
-  color: #ffffff;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 27px;
-}
-
-.modalContent .buttonsWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
 @media screen and (min-width: 768px) {
-  .logOutModal {
+  .addModal {
     /* background-color: hsla(256, 75%, 20%, 0.4); */
-    background-color: #220d5b3b;
+    background-color: rgba(34, 13, 91, 0.231);
 
     backdrop-filter: blur(3px);
 
@@ -72,8 +51,14 @@
   }
 
   .modalBg {
-    width: 533px;
-    height: 447px;
+    /* width: 540px;
+    height: 514px; */
+
+    width: fit-content;
+    height: fit-content;
+
+    /* todo: height: fit-content */
+
     border-radius: 8px;
     /* background: linear-gradient(270.02deg, #2e1746 3.2%, #2e225f 99.98%); */
 
