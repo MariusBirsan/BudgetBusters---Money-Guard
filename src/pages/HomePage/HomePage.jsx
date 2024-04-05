@@ -67,8 +67,6 @@ const HomePage = () => {
         <TransactionsList data={data} />
       )}
 
-      <Test />
-
       <ButtonAddTransactions onClick={() => setIsModalOpen(true)} />
       {/* {isModalOpen && (
         <ModalAddTransaction closeModal={() => setIsModalOpen(false)} />
