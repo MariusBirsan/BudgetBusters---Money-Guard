@@ -75,6 +75,13 @@
 .upYear {
   transform: translateY(-50%) rotate(-135deg);
 }
+.react-select__menu-list::-webkit-scrollbar {
+  display: none;
+}
+
+.react-select__menu-list {
+  scrollbar-width: none;
+}
 
 @media (min-width: 768px) {
   .dashboard {

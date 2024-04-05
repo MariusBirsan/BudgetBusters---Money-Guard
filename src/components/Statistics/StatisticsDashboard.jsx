@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import './StatisticsDashboard.module.css'; 
+import './StatisticsDashboard.module.css';
 
 const StatisticsDashboard = ({ onMonthChange, onYearChange }) => {
   const currentYear = new Date().getFullYear();
-  const currentMonth = new Date().getMonth() + 1; 
+  const currentMonth = new Date().getMonth() + 1;
 
   const monthsOptions = [
     { value: 1, label: 'January' },
@@ -54,38 +54,52 @@ const StatisticsDashboard = ({ onMonthChange, onYearChange }) => {
       borderColor: 'rgba(255, 255, 255, 0.1)',
       boxShadow: '0px 4px 60px rgba(0, 0, 0, 0.25)',
       borderRadius: '8px',
-      color: '#000000',
+      color: 'white',
       fontFamily: 'Poppins',
     }),
     option: (styles, { isFocused }) => ({
       ...styles,
-      background: isFocused ? 'rgb(158, 64, 186)' : '#533DBA',
-      boxShadow: isFocused ? '0px 4px 60px 0px rgba(0, 0, 0, 0.4)' : 'none',
-      color: isFocused ? '#FF868D' : '#000000',
-      color: isFocused ? '#FF868D' : 'white',
+      background: isFocused ? 'rgba(158, 64, 186, 0.5)' : 'transparent',
+      color: isFocused ? '#FF868D' : '#FFFFFF',
       cursor: 'pointer',
       fontFamily: 'Poppins',
+    }),
+    menu: styles => ({
+      ...styles,
+      marginTop: '10px',
+      borderRadius: '8px',
+      boxShadow: '0px 4px 60px 0px rgba(0, 0, 0, 0.4)',
+
+      background:
+        'linear-gradient(0deg, rgba(83, 61, 186, 0.85) 0%, rgba(80, 48, 154, 0.85) 43.14%, rgba(106, 70, 165, 0.775) 73.27%, rgba(133, 93, 175, 0.633) 120.03%)',
+      backgroundOrigin: 'border-box',
+      backgroundClip: 'padding-box, border-box',
     }),
   };
 
   return (
     <div className="dashboard">
-      <Select
-        name="month"
-        options={monthsOptions}
-        onChange={handleChangeMonth}
-        value={selectedMonth}
-        styles={customStyles}
-        classNamePrefix="react-select"
-      />
-      <Select
-        name="year"
-        options={yearsOptions}
-        onChange={handleChangeYear}
-        value={selectedYear}
-        styles={customStyles}
-        classNamePrefix="react-select"
-      />
+      <div style={{ marginBottom: '20px' }}>
+        <Select
+          name="month"
+          options={monthsOptions}
+          onChange={handleChangeMonth}
+          value={selectedMonth}
+          styles={customStyles}
+          classNamePrefix="react-select"
+        />
+      </div>
+
+      <div>
+        <Select
+          name="year"
+          options={yearsOptions}
+          onChange={handleChangeYear}
+          value={selectedYear}
+          styles={customStyles}
+          classNamePrefix="react-select"
+        />
+      </div>
     </div>
   );
 };
