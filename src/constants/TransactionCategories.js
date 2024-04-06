@@ -57,7 +57,6 @@ const transactionCategories = [
 ];
 
 const getTransactionId = transactionCategory => {
-  debugger;
   const transactionTargeted = transactionCategories.find(
     item => item.name === transactionCategory
   );
