@@ -1,9 +1,9 @@
 .dashboard {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+
   justify-content: center;
-  margin: 20px auto;
+
   max-width: 600px;
 }
 
@@ -27,6 +27,9 @@
   appearance: none;
   cursor: pointer;
 }
+.StatisticsDashboard_selectContainer {
+  margin-bottom: 0;
+}
 
 .select option {
   background-color: #734aef;
@@ -48,7 +51,7 @@
 
 .selectContainer {
   position: relative;
-  width: 280px;
+
   height: 50px;
   display: flex;
   align-items: center;
@@ -83,18 +86,33 @@
   scrollbar-width: none;
 }
 
+.react-select__menu-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.react-select__menu-list::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+.react-select__menu-list::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.react-select__menu-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 @media (min-width: 768px) {
   .dashboard {
     flex-direction: row;
     justify-content: space-around;
+    gap: 20px;
   }
 }
 
 @media (min-width: 1280px) {
   .dashboard {
     justify-content: space-between;
-  }
-  .selectContainer {
-    width: 182px;
+    gap: 20px;
   }
 }

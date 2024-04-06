@@ -3,7 +3,8 @@
   position: relative;
   width: 280px;
   height: 333px;
-  margin: auto; /* Centrarea graficului */
+  margin: auto;
+  overflow: hidden;
 }
 
 .totalText {

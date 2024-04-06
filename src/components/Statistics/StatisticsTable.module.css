@@ -1,23 +1,96 @@
-.text {
-  color: rgba(251, 251, 251, 1);
+.table {
+  width: 280px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
 }
+
+/* capul de tabel********************** */
+.headTable {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  width: 280px;
+  height: 56px;
+  border-radius: 8px;
+  background: rgba(82, 59, 126, 0.4);
+  backdrop-filter: blur(10px);
+  color: #fbfbfb;
+  box-shadow: 0px 4px 60px 0px #00000040;
+  border: 0px solid transparent;
+  border-image-source: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.082) 0%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  border-image-slice: 1;
+  font-size: 16px;
+}
+
+/* continutul tabelului********************** */
+.contentTable {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 280px;
+  color: #fbfbfb;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-top: 10px;
+}
+
+.objectTable {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* patratelul colorat********************* */
+
+/* randul tabelului**************** */
+.contentTable tr {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid transparent;
+  border-image-source: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.082) 0%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  border-image-slice: 1;
+  color: #fff;
+  height: 35px;
+  width: 100%;
+}
+
+/* totalurile generale************** */
 .totalTable {
   display: flex;
   flex-direction: column;
 }
+
 .type {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  padding-right: 15px;
 }
-.label {
-  width: 70px;
-  height: 21px;
+
+.summary {
   font-family: Poppins;
   font-size: 14px;
   font-weight: 600;
   line-height: 21px;
   text-align: left;
   color: rgba(251, 251, 251, 1);
+  margin-top: 15px;
+  padding-left: 10px;
 }
 
 .totalIncome {
@@ -34,6 +107,7 @@
   text-align: right;
   color: rgba(255, 134, 141, 1);
 }
+
 .totalExpense {
   width: 68px;
   height: 21px;
@@ -50,7 +124,28 @@
 }
 
 @media (min-width: 768px) {
+  .table {
+    width: 336px;
+  }
+
+  .headTable {
+    width: 336px;
+  }
+
+  .contentTable {
+    width: 336px;
+  }
 }
 
 @media (min-width: 1280px) {
+  .table {
+    width: 395 px;
+  }
+  .headTable {
+    width: 395px;
+  }
+
+  .contentTable {
+    width: 395px;
+  }
 }

@@ -46,6 +46,8 @@
   .statisticsContainer {
     flex-direction: row;
     justify-content: space-between;
+    align-items: baseline;
+    gap: 32px;
   }
   .chartContainer {
     width: 336px;
@@ -60,6 +62,7 @@
 
   .tableContainer {
     width: 100%;
+    margin-top: 0;
   }
 }
 
@@ -67,11 +70,18 @@
   .statisticsContainer {
     display: inline-flex;
     justify-content: center;
+    align-items: baseline;
+    margin-left: 50px;
   }
   .chartContainer {
     width: 288px;
     height: 288px;
     top: 177px;
     left: 549px;
+  }
+
+  .tableContainer {
+    width: 100%;
+    margin-top: 0;
   }
 }
