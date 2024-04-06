@@ -1,8 +1,79 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
-import './StatisticsDashboard.module.css';
+import styles from './StatisticsDashboard.module.css';
+
+const useWindowSize = () => {
+  const [size, setSize] = useState([0, 0]);
+  useEffect(() => {
+    const updateSize = () => {
+      setSize([window.innerWidth, window.innerHeight]);
+    };
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+  return size;
+};
 
 const StatisticsDashboard = ({ onMonthChange, onYearChange }) => {
+  const [width] = useWindowSize();
+
+  const getWidth = () => {
+    if (width >= 1280) {
+      return '182px'; // pentru desktop
+    } else if (width >= 768) {
+      return '160px'; // pentru laptop
+    } else {
+      return '280px'; // dimensiunea implicită pentru mobil și tablete
+    }
+  };
+
+  const customStyles = {
+    control: provided => ({
+      ...provided,
+      width: getWidth(), // Aplică lățimea dinamic
+      height: '50px',
+      background:
+        'linear-gradient(0deg, rgba(83, 61, 186, 0.7) 0%, rgba(80, 48, 154, 0.7) 43.14%, rgba(106, 70, 165, 0.525) 73.27%, rgba(133, 93, 175, 0.133) 120.03%)',
+      borderColor: 'rgba(255, 255, 255, 0.1)',
+      boxShadow: '0px 4px 60px rgba(0, 0, 0, 0.25)',
+      borderRadius: '8px',
+      color: 'white',
+      fontFamily: 'Poppins',
+    }),
+    option: (styles, { isFocused }) => ({
+      ...styles,
+      background: isFocused ? 'rgba(158, 64, 186, 0.5)' : 'transparent',
+      color: isFocused ? '#FF868D' : '#FFFFFF',
+      cursor: 'pointer',
+      fontFamily: 'Poppins',
+    }),
+    menu: styles => ({
+      ...styles,
+      marginTop: '10px',
+      borderRadius: '8px',
+      boxShadow: '0px 4px 60px 0px rgba(0, 0, 0, 0.4)',
+      background:
+        'linear-gradient(0deg, rgba(83, 61, 186, 0.85) 0%, rgba(80, 48, 154, 0.85) 43.14%, rgba(106, 70, 165, 0.775) 73.27%, rgba(133, 93, 175, 0.633) 120.03%)',
+      backgroundOrigin: 'border-box',
+      backgroundClip: 'padding-box, border-box',
+    }),
+    singleValue: styles => ({
+      ...styles,
+      color: 'white',
+    }),
+    dropdownIndicator: provided => ({
+      ...provided,
+      color: 'white',
+      '&:hover': {
+        color: 'white',
+      },
+    }),
+    indicatorSeparator: () => ({
+      display: 'none',
+    }),
+  };
+
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth() + 1;
 
@@ -44,42 +115,9 @@ const StatisticsDashboard = ({ onMonthChange, onYearChange }) => {
     if (onYearChange) onYearChange(selectedOption.value);
   };
 
-  const customStyles = {
-    control: styles => ({
-      ...styles,
-      width: 280,
-      height: 50,
-      background:
-        'linear-gradient(0deg, rgba(83, 61, 186, 0.7) 0%, rgba(80, 48, 154, 0.7) 43.14%, rgba(106, 70, 165, 0.525) 73.27%, rgba(133, 93, 175, 0.133) 120.03%)',
-      borderColor: 'rgba(255, 255, 255, 0.1)',
-      boxShadow: '0px 4px 60px rgba(0, 0, 0, 0.25)',
-      borderRadius: '8px',
-      color: 'white',
-      fontFamily: 'Poppins',
-    }),
-    option: (styles, { isFocused }) => ({
-      ...styles,
-      background: isFocused ? 'rgba(158, 64, 186, 0.5)' : 'transparent',
-      color: isFocused ? '#FF868D' : '#FFFFFF',
-      cursor: 'pointer',
-      fontFamily: 'Poppins',
-    }),
-    menu: styles => ({
-      ...styles,
-      marginTop: '10px',
-      borderRadius: '8px',
-      boxShadow: '0px 4px 60px 0px rgba(0, 0, 0, 0.4)',
-
-      background:
-        'linear-gradient(0deg, rgba(83, 61, 186, 0.85) 0%, rgba(80, 48, 154, 0.85) 43.14%, rgba(106, 70, 165, 0.775) 73.27%, rgba(133, 93, 175, 0.633) 120.03%)',
-      backgroundOrigin: 'border-box',
-      backgroundClip: 'padding-box, border-box',
-    }),
-  };
-
   return (
-    <div className="dashboard">
-      <div style={{ marginBottom: '20px' }}>
+    <div className={styles.dashboard}>
+      <div className={styles.selectContainer} style={{ marginBottom: '20px' }}>
         <Select
           name="month"
           options={monthsOptions}
@@ -87,10 +125,11 @@ const StatisticsDashboard = ({ onMonthChange, onYearChange }) => {
           value={selectedMonth}
           styles={customStyles}
           classNamePrefix="react-select"
+          isSearchable={false} // Dezactivează căutarea
         />
       </div>
 
-      <div>
+      <div className={styles.selectContainer}>
         <Select
           name="year"
           options={yearsOptions}
@@ -98,6 +137,7 @@ const StatisticsDashboard = ({ onMonthChange, onYearChange }) => {
           value={selectedYear}
           styles={customStyles}
           classNamePrefix="react-select"
+          isSearchable={false} // Dezactivează căutarea
         />
       </div>
     </div>
