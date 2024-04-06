@@ -32,18 +32,20 @@ const TransactionTableRow = ({ transaction }) => {
 
   return (
     <tr className={styles.dataRow}>
-      <td className={styles.TransactionTableRow}>
+      <td className={styles.TransactionDateColumn}>
         {formatData(transactionDate)}
       </td>
-      <td className={styles.TransactionTableRow}>
+      <td className={styles.TransactionTypeColumn}>
         {type === 'INCOME' ? '+' : '-'}
       </td>
-      <td className={styles.TransactionTableRow}>
+      <td className={styles.TransactionCategoryColumn}>
         {getTransactionCategory(categoryId)}
       </td>
-      <td className={styles.TransactionTableRow}>{comment}</td>
-      <td className={`${styles.TransactionTableRow} ${textClass}`}>{amount}</td>
-      <td className={styles.TransactionTableRow}>
+      <td className={styles.TransactionCommentColumn}>{comment}</td>
+      <td className={`${styles.TransactionAmountColumn} ${textClass}`}>
+        {amount}
+      </td>
+      <td className={styles.TransactionEditColumn}>
         {/* Butonul pentru deschiderea modalului de editare */}
         <button
           className={styles.editButton}
@@ -63,7 +65,7 @@ const TransactionTableRow = ({ transaction }) => {
           />
         )}
       </td>
-      <td className={styles.TransactionTableRow}>
+      <td className={styles.TransactionDeleteColumn}>
         {/* Butonul pentru deschiderea modalului de ștergere */}
         <button
           className={styles.deleteButton}

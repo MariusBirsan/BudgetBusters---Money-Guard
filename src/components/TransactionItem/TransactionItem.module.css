@@ -1,5 +1,5 @@
 .TransactionItem {
-  margin: 50px;
+  margin-bottom: 8px;
   display: flex;
   flex-direction: column;
   width: 280px;

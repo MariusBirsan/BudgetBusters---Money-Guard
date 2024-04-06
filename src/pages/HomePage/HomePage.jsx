@@ -26,39 +26,6 @@ const HomePage = () => {
 
   const screenCondition = useMediaQuery({ query: '(min-width: 768px)' });
 
-  // const data = [
-  //   {
-  //     id: '1',
-  //     transactionDate: 'string',
-  //     type: 'INCOME',
-  //     categoryId: 'string',
-  //     userId: 'string',
-  //     comment: 'string',
-  //     amount: 0,
-  //     balanceAfter: 0,
-  //   },
-  //   {
-  //     id: '2',
-  //     transactionDate: 'string',
-  //     type: 'EXPENSE',
-  //     categoryId: 'string',
-  //     userId: 'string',
-  //     comment: 'string',
-  //     amount: 0,
-  //     balanceAfter: 0,
-  //   },
-  //   {
-  //     id: '3',
-  //     transactionDate: 'string',
-  //     type: 'INCOME',
-  //     categoryId: 'string',
-  //     userId: 'string',
-  //     comment: 'string',
-  //     amount: 0,
-  //     balanceAfter: 0,
-  //   },
-  // ];
-
   return (
     <div className={styles.HomePage}>
       {screenCondition ? (

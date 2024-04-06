@@ -6,14 +6,14 @@ const TransactionsTable = ({ data }) => {
     <div className={styles.TransactionsTable}>
       <table className={styles.table}>
         <thead className={styles.tableHead}>
-          <tr>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Category</th>
-            <th>Comment</th>
-            <th>Sum</th>
-            <th></th>
-            <th></th>
+          <tr className={styles.tableHeadRow}>
+            <th className={styles.dateColumn}>Date</th>
+            <th className={styles.typeColumn}>Type</th>
+            <th className={styles.categoryColumn}>Category</th>
+            <th className={styles.commentColumn}>Comment</th>
+            <th className={styles.sumColumn}>Sum</th>
+            <th className={styles.editColumn}></th>
+            <th className={styles.deleteColumn}></th>
           </tr>
         </thead>
         <tbody className={styles.tableBody}>
