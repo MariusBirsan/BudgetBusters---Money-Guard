@@ -10,6 +10,7 @@ const register = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await axios.post('/api/auth/sign-up', { ...userData });
+      axiosConfig.setAxiosHeader(response.data.token);
 
       toast.success('Your account has been successfully created !');
 

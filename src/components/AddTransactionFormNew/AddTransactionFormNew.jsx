@@ -12,10 +12,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import {
   transactionCategories,
   getTransactionId,
-} from 'constants/TransactionCategories';
+} from '../../constants/TransactionConstants';
 
 import { addTransaction } from '../../redux/transactions/operations';
-import { changeBalanceValue } from '../../redux/auth/slice'; // Adăugăm importul pentru funcția de actualizare a balanței
 
 const AddTransactionFormNew = ({ closeModal }) => {
   const [isOnIncomeTab, setIsOnIncomeTab] = useState(true);
@@ -57,11 +56,6 @@ const AddTransactionFormNew = ({ closeModal }) => {
     )
       .unwrap()
       .then(() => {
-        // După adăugarea tranzacției, actualizăm balanța
-        const transactionAmount = isOnIncomeTab
-          ? values.amount
-          : 0 - values.amount;
-        dispatch(changeBalanceValue(-transactionAmount));
         closeModal();
       })
       .catch(error => {

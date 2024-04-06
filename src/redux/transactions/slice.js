@@ -2,11 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import {
   addTransaction,
+  deteleTransaction,
   fetchAllTransactions,
-  updateTransactionThunk,
-  deleteTransactionThunk,
-  getTransactionCategoriesThunk,
-  getTransactionSummaryThunk,
+  fetchTransactionsSummary,
 } from './operations';
 
 const initialState = {
@@ -16,15 +14,20 @@ const initialState = {
   isLoading: false,
   error: null,
 
-  filter: {
-    mounth: '',
-    date: '',
-  },
+  summary: [],
+
+  trasactionIdForDelete: '',
+  transactionIdForUpdate: '',
 };
 
 const transactionsSlice = createSlice({
   name: 'transactions',
   initialState,
+  reducers: {
+    setTrasactionIdForDelete: (state, action) => {
+      state.trasactionIdForDelete = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder
 
@@ -42,6 +45,22 @@ const transactionsSlice = createSlice({
         state.items.push(action.payload);
       })
 
+      // * Delete transaction
+      .addCase(deteleTransaction.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(deteleTransaction.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(deteleTransaction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+
+        const index = state.items.findIndex(el => el.id === action.payload);
+        state.items.splice(index, 1);
+      })
+
       // * Get all transactions
       .addCase(fetchAllTransactions.pending, state => {
         state.isLoading = true;
@@ -56,64 +75,23 @@ const transactionsSlice = createSlice({
         state.items = action.payload;
       })
 
-      // * updateTransactionThunk
-      .addCase(updateTransactionThunk.pending, state => {
+      // * Get transactions summary
+      .addCase(fetchTransactionsSummary.pending, state => {
         state.isLoading = true;
-        state.error = null;
       })
-      .addCase(updateTransactionThunk.fulfilled, (state, action) => {
-        const index = state.items.findIndex(t => t.id === action.payload.id);
-        if (index !== -1) {
-          state.items[index] = action.payload;
-        }
-        state.isLoading = false;
-      })
-      .addCase(updateTransactionThunk.rejected, (state, action) => {
+      .addCase(fetchTransactionsSummary.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
-
-      // * deleteTransactionThunk
-      .addCase(deleteTransactionThunk.pending, state => {
-        state.isLoading = true;
+      .addCase(fetchTransactionsSummary.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.error = null;
-      })
-      .addCase(deleteTransactionThunk.fulfilled, (state, action) => {
-        state.items = state.items.filter(t => t.id !== action.payload);
-        state.isLoading = false;
-      })
-      .addCase(deleteTransactionThunk.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      })
-
-      // * getTransactionCategoriesThunk
-      .addCase(getTransactionCategoriesThunk.pending, state => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(getTransactionCategoriesThunk.fulfilled, (state, action) => {
-        state.categories = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(getTransactionCategoriesThunk.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      })
-
-      // * getTransactionSummaryThunk
-      .addCase(getTransactionSummaryThunk.pending, state => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(getTransactionSummaryThunk.fulfilled, state => {
-        state.isLoading = false;
-      })
-      .addCase(getTransactionSummaryThunk.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
+        state.summary = action.payload;
       });
+
+    // todo: de continuat de aici in jos
   },
 });
 
+export const { setTrasactionIdForDelete } = transactionsSlice.actions;
 export const transactionsReducer = transactionsSlice.reducer;

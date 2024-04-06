@@ -1,22 +1,34 @@
 import styles from './ModalDeleteTransaction.module.css';
 import { useMediaQuery } from 'react-responsive';
-import FormButton from 'components/common/FormButton/FormButton';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { deleteTransactionThunk } from '../../redux/transactions/operations';
-import { changeBalanceValue } from '../../redux/auth/slice';
 
-const ModalDeleteTransaction = ({ transaction, closeModal }) => {
+import FormButton from 'components/common/FormButton/FormButton';
+import Logo from 'components/common/Logo/Logo';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { deteleTransaction } from '../../redux/transactions/operations';
+import { selectTrasactionIdForDelete } from '../../redux/transactions/selectors';
+
+const ModalDeleteTransaction = ({ closeModal }) => {
   const dispatch = useDispatch();
 
+  const trasactionIdForDelete = useSelector(selectTrasactionIdForDelete);
+
+  const modalRef = useRef();
+
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    // setTimeout(() => {
+    //   modalRef.current.classList.add(styles.isOpen);
+    // }, 0);
+
     const addCloseEvent = event => {
       event.key === 'Escape' && closeModal();
     };
-
     document.addEventListener('keydown', addCloseEvent);
 
     return () => {
+      document.body.style.overflow = 'auto';
       document.removeEventListener('keydown', addCloseEvent);
     };
   });
@@ -25,49 +37,43 @@ const ModalDeleteTransaction = ({ transaction, closeModal }) => {
     event.currentTarget === event.target && closeModal();
   };
 
-  const handleDelete = () => {
-    const { id, amount } = transaction; // Destructurarea obiectului transaction pentru a accesa id-ul și amount-ul
-    dispatch(deleteTransactionThunk(id))
-      .unwrap()
-      .then(() => {
-        dispatch(changeBalanceValue(amount));
-        closeModal();
-      });
-  };
-
   const screenCondition = useMediaQuery({ query: '(min-width: 768px)' });
 
-  // Opreste derularea in background
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, []);
+  const handleDeleteClick = () => [
+    dispatch(deteleTransaction(trasactionIdForDelete))
+      .unwrap()
+      .then(() => {
+        closeModal();
+      })
+      .catch(error => {
+        console.log(error);
+      }),
+  ];
 
   return (
     <div
-      className={`${styles.test} ${styles.deleteModal}`}
+      className={styles.deleteModal}
       onClick={closeOnClickOutside}
+      ref={modalRef}
     >
       <div className={styles.modalBg}>
         <div className={styles.modalContent}>
-          {screenCondition && (
-            <p>Are you sure you want to DELETE this transaction?</p>
-          )}
+          {screenCondition && <Logo variant={'formLogo'} />}
+
+          <p>Are you sure you want to detete this transaction?</p>
 
           <div className={styles.buttonsWrapper}>
             <FormButton
               type={'button'}
-              text={'DELETE'}
+              text={'Delete'}
               variant={'multiColorButtton'}
-              handlerFunction={handleDelete} // Utilizează funcția handleDelete pentru a gestiona ștergerea
+              handlerFunction={handleDeleteClick}
             />
             <FormButton
               type={'button'}
               text={'cancel'}
               variant={'whiteButtton'}
-              handlerFunction={closeModal}
+              handlerFunction={() => closeModal()}
             />
           </div>
         </div>
