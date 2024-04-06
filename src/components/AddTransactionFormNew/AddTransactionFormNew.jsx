@@ -58,9 +58,7 @@ const AddTransactionFormNew = ({ closeModal }) => {
       .unwrap()
       .then(() => {
         // După adăugarea tranzacției, actualizăm balanța
-        const transactionAmount = isOnIncomeTab
-          ? values.amount
-          : -values.amount;
+        const transactionAmount = values.amount;
         dispatch(changeBalanceValue(transactionAmount));
         closeModal();
       })
