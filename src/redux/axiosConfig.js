@@ -5,7 +5,6 @@ const setAxiosBaseURL = () => {
 };
 
 const setAxiosHeader = tokenReceived => {
-  // debugger;
   const savedDataLocal = JSON.parse(localStorage.getItem('persist:auth'));
 
   const savedToken =

@@ -56,7 +56,6 @@ const AddTransactionFormNew = ({ closeModal }) => {
     )
       .unwrap()
       .then(() => {
-        debugger;
         closeModal();
       })
       .catch(error => {

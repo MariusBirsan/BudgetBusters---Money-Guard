@@ -1,23 +1,26 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectUserData } from '../../redux/auth/selectors';
+import { selectBalance } from '../../redux/auth/selectors';
 import styles from './Balance.module.css';
 
-const Balance = () => {
-  const user = useSelector(selectUserData);
+function Balance() {
+  const balance = useSelector(selectBalance);
 
-  // Verifică dacă user există și are proprietatea balance:
-  const balanceValue = user && user.balance ? user.balance : 0;
+  console.log('Valoarea neformatată a balanței:', balance);
+
+  function formatNumber(number) {
+    return number.toFixed(2);
+  }
 
   return (
     <div className={styles.balance}>
       <h3>Your balance</h3>
-
       <p>
-        ₴ <span>{balanceValue.toFixed(2)}</span>
+        <span>₴ </span>
+        {formatNumber(Number(balance))}
       </p>
     </div>
   );
-};
+}
 
 export default Balance;

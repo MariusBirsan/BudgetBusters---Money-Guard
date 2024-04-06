@@ -4,6 +4,7 @@ import FormButton from 'components/common/FormButton/FormButton';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteTransactionThunk } from '../../redux/transactions/operations';
+import { changeBalanceValue } from '../../redux/auth/slice';
 
 const ModalDeleteTransaction = ({ transaction, closeModal }) => {
   const dispatch = useDispatch();
@@ -25,8 +26,13 @@ const ModalDeleteTransaction = ({ transaction, closeModal }) => {
   };
 
   const handleDelete = () => {
-    dispatch(deleteTransactionThunk(transaction.id)); // Dispatch operația de ștergere cu id-ul tranzacției
-    closeModal(); // Închide modalul după ștergere
+    const { id, amount } = transaction; // Destructurarea obiectului transaction pentru a accesa id-ul și amount-ul
+    dispatch(deleteTransactionThunk(id))
+      .unwrap()
+      .then(() => {
+        dispatch(changeBalanceValue(amount));
+        closeModal();
+      });
   };
 
   const screenCondition = useMediaQuery({ query: '(min-width: 768px)' });
