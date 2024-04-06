@@ -15,6 +15,7 @@ import {
 } from 'constants/TransactionCategories';
 
 import { addTransaction } from '../../redux/transactions/operations';
+import { changeBalanceValue } from '../../redux/auth/slice'; // Adăugăm importul pentru funcția de actualizare a balanței
 
 const AddTransactionFormNew = ({ closeModal }) => {
   const [isOnIncomeTab, setIsOnIncomeTab] = useState(true);
@@ -56,6 +57,11 @@ const AddTransactionFormNew = ({ closeModal }) => {
     )
       .unwrap()
       .then(() => {
+        // După adăugarea tranzacției, actualizăm balanța
+        const transactionAmount = isOnIncomeTab
+          ? values.amount
+          : -values.amount;
+        dispatch(changeBalanceValue(transactionAmount));
         closeModal();
       })
       .catch(error => {
