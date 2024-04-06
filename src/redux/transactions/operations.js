@@ -53,36 +53,10 @@ const fetchAllTransactions = createAsyncThunk(
 
 // todo: de continuat de aici, in jos //
 
-const getAllTransactionsThunk = createAsyncThunk(
-  'transactions/getAll',
-
-  async (_, thunkAPI) => {
-    axiosConfig.setAxiosHeader();
-
-    try {
-      const response = await axios.get('/api/transactions');
-
-      // Afișează datele în consolă:
-      console.log('Datele din API:', response.data);
-      toast.success('Transaction added successfully!');
-      return response.data;
-    } catch (error) {
-      const errorNotify =
-        error.response.data.message ??
-        `Operation failed, the data could not be sent. We are facing some technical problems on our servers!`;
-
-      toast.error(errorNotify);
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
 const updateTransactionThunk = createAsyncThunk(
   'transactions/update',
 
   async ({ transactionId, transactionData }, thunkAPI) => {
-    axiosConfig.setAxiosHeader();
-
     try {
       const response = await axios.patch(
         `/api/transactions/${transactionId}`,
@@ -106,8 +80,6 @@ const deleteTransactionThunk = createAsyncThunk(
   'transactions/delete',
 
   async (transactionId, thunkAPI) => {
-    axiosConfig.setAxiosHeader();
-
     try {
       const response = await axios.delete(`/api/transactions/${transactionId}`);
 
@@ -128,8 +100,6 @@ const getTransactionCategoriesThunk = createAsyncThunk(
   'transactionCategories/getAll',
 
   async (_, thunkAPI) => {
-    axiosConfig.setAxiosHeader();
-
     try {
       const response = await axios.get('/api/transaction-categories');
 
@@ -151,8 +121,6 @@ const getTransactionSummaryThunk = createAsyncThunk(
   'transactionSummary/get',
 
   async ({ month, year }, thunkAPI) => {
-    axiosConfig.setAxiosHeader();
-
     try {
       const response = await axios.get(
         `/api/transactions-summary?month=${month}&year=${year}`
@@ -174,7 +142,6 @@ const getTransactionSummaryThunk = createAsyncThunk(
 export {
   addTransaction,
   fetchAllTransactions,
-  getAllTransactionsThunk,
   updateTransactionThunk,
   deleteTransactionThunk,
   getTransactionCategoriesThunk,
