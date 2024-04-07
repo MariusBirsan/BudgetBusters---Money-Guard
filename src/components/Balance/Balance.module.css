@@ -10,6 +10,8 @@
   flex-direction: column;
   gap: 11px;
   align-self: center;
+
+  /* overflow-x: scroll; */
 }
 
 .balance h3 {

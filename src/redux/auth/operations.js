@@ -10,6 +10,7 @@ const register = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await axios.post('/api/auth/sign-up', { ...userData });
+      axiosConfig.setAxiosHeader(response.data.token);
 
       toast.success('Your account has been successfully created !');
 
@@ -55,4 +56,19 @@ const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   }
 });
 
-export { register, logIn, logOut };
+const getUserInfo = createAsyncThunk(
+  'auth/getUserInfo',
+  async (_, thunkAPI) => {
+    debugger;
+    try {
+      const response = await axios.get('/api/users/current');
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export { register, logIn, logOut, getUserInfo };

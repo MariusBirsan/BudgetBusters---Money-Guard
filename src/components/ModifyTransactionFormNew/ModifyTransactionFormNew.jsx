@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import styles from './AddTransactionFormNew.module.css';
+import styles from './ModifyTransactionFormNew.module.css';
+
 import FormButton from 'components/common/FormButton/FormButton';
 import icons from '../../images/icons/sprite.svg';
 import { useMediaQuery } from 'react-responsive';
@@ -14,12 +15,15 @@ import {
   getTransactionId,
 } from '../../constants/TransactionConstants';
 
-import { addTransaction } from '../../redux/transactions/operations';
+import { useSelector } from 'react-redux';
+import { selectTransactionForUpdate } from '../../redux/transactions/selectors';
+import { modifyTransaction } from '../../redux/transactions/operations';
 import { getUserInfo } from '../../redux/auth/operations';
 
-const AddTransactionFormNew = ({ closeModal }) => {
-  const [isOnIncomeTab, setIsOnIncomeTab] = useState(true);
-  useEffect(() => {}, [isOnIncomeTab]);
+const ModifyTransactionFormNew = ({ closeModal }) => {
+  const transactionForUpdate = useSelector(selectTransactionForUpdate);
+
+  const isOnIncomeTab = transactionForUpdate.type === 'INCOME' ? true : false;
 
   const screenCondition = useMediaQuery({ query: '(min-width: 768px)' });
 
@@ -47,12 +51,15 @@ const AddTransactionFormNew = ({ closeModal }) => {
     setSubmitting(true);
 
     dispatch(
-      addTransaction({
-        transactionDate: startDate,
-        type: isOnIncomeTab ? 'INCOME' : 'EXPENSE',
-        categoryId: getTransactionId(values.category || 'Income'),
-        comment: values.comment,
-        amount: isOnIncomeTab ? values.amount : 0 - values.amount,
+      modifyTransaction({
+        transactionId: transactionForUpdate.id,
+        transactionData: {
+          transactionDate: startDate,
+          type: isOnIncomeTab ? 'INCOME' : 'EXPENSE',
+          categoryId: getTransactionId(values.category || 'Income'),
+          comment: values.comment,
+          amount: isOnIncomeTab ? values.amount : 0 - values.amount,
+        },
       })
     )
       .unwrap()
@@ -82,20 +89,13 @@ const AddTransactionFormNew = ({ closeModal }) => {
       >
         {({ isSubmitting }) => (
           <Form>
-            <h2 className={styles.formTitle}>Add transaction</h2>
+            <h2 className={styles.formTitle}>Edit transaction</h2>
 
             <div className={styles.switcheWrapper}>
               <span className={`${isOnIncomeTab ? styles.income : null}`}>
                 Income
               </span>
-
-              <input
-                type="checkbox"
-                id="switcherButton"
-                onChange={() => setIsOnIncomeTab(!isOnIncomeTab)}
-              />
-              <label htmlFor="switcherButton"></label>
-
+              <span className={styles.delimeter}>/</span>
               <span className={`${!isOnIncomeTab ? styles.expense : null}`}>
                 Expense
               </span>
@@ -136,7 +136,7 @@ const AddTransactionFormNew = ({ closeModal }) => {
             <div className={styles.buttonsWrapper}>
               <FormButton
                 type={'submit'}
-                text={'Add'}
+                text={'save'}
                 variant={'multiColorButtton'}
                 isDisabled={isSubmitting}
               />
@@ -154,4 +154,4 @@ const AddTransactionFormNew = ({ closeModal }) => {
   );
 };
 
-export default AddTransactionFormNew;
+export default ModifyTransactionFormNew;

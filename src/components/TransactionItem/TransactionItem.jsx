@@ -3,10 +3,29 @@ import icons from '../../images/icons/sprite.svg';
 import {
   formatData,
   getTransactionCategory,
-} from 'constants/TransactionCategories';
+} from '../../constants/TransactionConstants';
+import { useDispatch } from 'react-redux';
+import {
+  setTrasactionForUpdate,
+  setTrasactionIdForDelete,
+} from '../../redux/transactions/slice';
 
-const TransactionItem = ({ transaction }) => {
+const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
   const { type, categoryId, comment, amount, transactionDate } = transaction;
+
+  const dispatch = useDispatch();
+
+  const handleDeleteClick = () => {
+    openDeleteModal();
+    dispatch(setTrasactionIdForDelete(transaction.id));
+  };
+
+  const handleEditClick = () => {
+    openEditModal();
+    dispatch(
+      setTrasactionForUpdate({ id: transaction.id, type: transaction.type })
+    );
+  };
 
   let textClass = '';
 
@@ -44,10 +63,18 @@ const TransactionItem = ({ transaction }) => {
         <span className={styles.dynamicData}>{amount}</span>
       </div>
       <div className={`${styles.row} ${styles.sixthRow}`}>
-        <button type="button" className={styles.deleteButton}>
+        <button
+          type="button"
+          className={styles.deleteButton}
+          onClick={handleDeleteClick}
+        >
           Delete
         </button>
-        <button className={styles.editButton} type="button">
+        <button
+          className={styles.editButton}
+          type="button"
+          onClick={handleEditClick}
+        >
           <svg className={styles.editIcon}>
             <use href={`${icons}#icon-edit`}></use>
           </svg>

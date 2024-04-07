@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
-import styles from './ModalAddTransactionNew.module.css';
-import AddTransactionFormNew from 'components/AddTransactionFormNew/AddTransactionFormNew';
+import styles from './ModalEditTransactionNew.module.css';
+import ModifyTransactionFormNew from 'components/ModifyTransactionFormNew/ModifyTransactionFormNew';
 
-const ModalAddTransactionNew = ({ closeModal }) => {
+const ModalEditTransactionNew = ({ closeModal }) => {
   const modalRef = useRef();
 
   useEffect(() => {
@@ -31,15 +31,15 @@ const ModalAddTransactionNew = ({ closeModal }) => {
     <>
       <div
         ref={modalRef}
-        className={styles.addModal}
+        className={styles.editModal}
         onClick={closeOnClickOutside}
       >
         <div className={styles.modalBg}>
-          <AddTransactionFormNew closeModal={closeModal} />
+          <ModifyTransactionFormNew closeModal={closeModal} />
         </div>
       </div>
     </>
   );
 };
 
-export default ModalAddTransactionNew;
+export default ModalEditTransactionNew;

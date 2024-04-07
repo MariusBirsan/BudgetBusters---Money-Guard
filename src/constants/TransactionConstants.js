@@ -74,18 +74,39 @@ const getTransactionCategory = transactionId => {
 
 const formatData = unixData => {
   const year = new Date(unixData).getFullYear();
-  const mounth = new Date(unixData).getMonth();
+  const mounth = new Date(unixData).getMonth() + 1;
   const day = new Date(unixData).getDate();
 
   const doubleDigitsFormatMounth = String(mounth).padStart(2, 0);
   const doubleDigitsFormatDay = String(day).padStart(2, 0);
 
-  return `${doubleDigitsFormatMounth}.${doubleDigitsFormatDay}.${year}`;
+  return `${doubleDigitsFormatDay}.${doubleDigitsFormatMounth}.${year}`;
 };
+
+const Months_OPTIONS = [
+  { value: 1, label: 'January' },
+  { value: 2, label: 'February' },
+  { value: 3, label: 'March' },
+  { value: 4, label: 'April' },
+  { value: 5, label: 'May' },
+  { value: 6, label: 'June' },
+  { value: 7, label: 'July' },
+  { value: 8, label: 'August' },
+  { value: 9, label: 'September' },
+  { value: 10, label: 'October' },
+  { value: 11, label: 'November' },
+  { value: 12, label: 'December' },
+];
+
+const CURRENT_YEAR = new Date().getFullYear();
+
+const YEARS_OPTIONS = [CURRENT_YEAR, CURRENT_YEAR - 1, CURRENT_YEAR - 2];
 
 export {
   transactionCategories,
   getTransactionId,
   getTransactionCategory,
   formatData,
+  Months_OPTIONS,
+  YEARS_OPTIONS,
 };
