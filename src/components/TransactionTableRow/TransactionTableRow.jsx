@@ -4,10 +4,17 @@ import {
 } from '../../constants/TransactionConstants';
 import icons from '../../images/icons/sprite.svg';
 import styles from './TransactionTableRow.module.css';
-import { setTrasactionIdForDelete } from '../../redux/transactions/slice';
+import {
+  setTrasactionForUpdate,
+  setTrasactionIdForDelete,
+} from '../../redux/transactions/slice';
 import { useDispatch } from 'react-redux';
 
-const TransactionTableRow = ({ transaction, openDeleteModal }) => {
+const TransactionTableRow = ({
+  transaction,
+  openDeleteModal,
+  openEditModal,
+}) => {
   const { type, categoryId, comment, amount, transactionDate } = transaction;
 
   const dispatch = useDispatch();
@@ -15,6 +22,13 @@ const TransactionTableRow = ({ transaction, openDeleteModal }) => {
   const handleDeleteClick = () => {
     openDeleteModal();
     dispatch(setTrasactionIdForDelete(transaction.id));
+  };
+
+  const handleEditClick = () => {
+    openEditModal();
+    dispatch(
+      setTrasactionForUpdate({ id: transaction.id, type: transaction.type })
+    );
   };
 
   let textClass = '';
@@ -42,7 +56,11 @@ const TransactionTableRow = ({ transaction, openDeleteModal }) => {
         {amount}
       </td>
       <td className={styles.TransactionEditColumn}>
-        <button className={styles.editButton} type="button">
+        <button
+          className={styles.editButton}
+          type="button"
+          onClick={handleEditClick}
+        >
           <svg className={styles.editIcon}>
             <use href={`${icons}#icon-edit`}></use>
           </svg>

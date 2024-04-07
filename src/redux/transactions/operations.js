@@ -70,6 +70,31 @@ const deteleTransaction = createAsyncThunk(
   }
 );
 
+// *Modify transaction //
+const modifyTransaction = createAsyncThunk(
+  'transactions/modifyTransaction',
+
+  async ({ transactionId, transactionData }, thunkAPI) => {
+    debugger;
+    try {
+      const response = await axios.patch(
+        `/api/transactions/${transactionId}`,
+        transactionData
+      );
+
+      toast.success('Transaction modified successfully !');
+      return response.data;
+    } catch (error) {
+      const errorNotify =
+        error.response.data.message ??
+        `Operation failed and transaction not modified. We are facing some technical problems with our servers ! `;
+
+      toast.error(errorNotify);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 // *Get transactions summary //
 const fetchTransactionsSummary = createAsyncThunk(
   'transactions/fetchTransactionsSummary',
@@ -99,6 +124,7 @@ export {
   addTransaction,
   deteleTransaction,
   fetchTransactionsSummary,
+  modifyTransaction,
 };
 
 // todo: de continuat de aici, in jos //

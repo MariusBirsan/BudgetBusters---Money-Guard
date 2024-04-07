@@ -1,7 +1,7 @@
 import TransactionItem from 'components/TransactionItem/TransactionItem';
 import styles from './TransactionsList.module.css';
 
-const TransactionsList = ({ data, openDeleteModal }) => {
+const TransactionsList = ({ data, openDeleteModal, openEditModal }) => {
   return (
     <ul className={styles.TransactionList}>
       {data.map(item => (
@@ -9,6 +9,7 @@ const TransactionsList = ({ data, openDeleteModal }) => {
           key={item.id}
           transaction={item}
           openDeleteModal={openDeleteModal}
+          openEditModal={openEditModal}
         />
       ))}
     </ul>

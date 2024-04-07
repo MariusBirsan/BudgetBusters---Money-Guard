@@ -7,11 +7,13 @@ import TransactionsTable from 'components/TransactionsTable/TransactionsTable';
 import { useMediaQuery } from 'react-responsive';
 import styles from './HomePage.module.css';
 
-import ModalAddTransactionNew from 'components/ModalAddTransactionNew/ModalAddTransactionNew';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAllTransactions } from '../../redux/transactions/selectors';
 import { fetchAllTransactions } from '../../redux/transactions/operations';
+
 import ModalDeleteTransaction from 'components/ModalDeleteTransaction/ModalDeleteTransaction';
+import ModalAddTransactionNew from 'components/ModalAddTransactionNew/ModalAddTransactionNew';
+import ModalEditTransactionNew from 'components/ModalEditTransactionNew/ModalEditTransactionNew';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -24,7 +26,7 @@ const HomePage = () => {
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  // const [isEditModalOpen, setisEditModalOpen] = useState(false);
+  const [isEditModalOpen, setisEditModalOpen] = useState(false);
 
   const screenCondition = useMediaQuery({ query: '(min-width: 768px)' });
 
@@ -35,11 +37,13 @@ const HomePage = () => {
           <TransactionsTable
             data={data}
             openDeleteModal={() => setIsDeleteModalOpen(true)}
+            openEditModal={() => setisEditModalOpen(true)}
           />
         ) : (
           <TransactionsList
             data={data}
             openDeleteModal={() => setIsDeleteModalOpen(true)}
+            openEditModal={() => setisEditModalOpen(true)}
           />
         )}
 
@@ -54,6 +58,12 @@ const HomePage = () => {
         {isDeleteModalOpen && (
           <ModalDeleteTransaction
             closeModal={() => setIsDeleteModalOpen(false)}
+          />
+        )}
+
+        {isEditModalOpen && (
+          <ModalEditTransactionNew
+            closeModal={() => setisEditModalOpen(false)}
           />
         )}
       </>

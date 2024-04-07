@@ -5,6 +5,7 @@ import {
   deteleTransaction,
   fetchAllTransactions,
   fetchTransactionsSummary,
+  modifyTransaction,
 } from './operations';
 
 const initialState = {
@@ -17,7 +18,10 @@ const initialState = {
   summary: [],
 
   trasactionIdForDelete: '',
-  transactionIdForUpdate: '',
+  transactionForUpdate: {
+    id: '',
+    type: '',
+  },
 };
 
 const transactionsSlice = createSlice({
@@ -26,6 +30,9 @@ const transactionsSlice = createSlice({
   reducers: {
     setTrasactionIdForDelete: (state, action) => {
       state.trasactionIdForDelete = action.payload;
+    },
+    setTrasactionForUpdate: (state, action) => {
+      state.transactionForUpdate = action.payload;
     },
   },
   extraReducers: builder => {
@@ -61,6 +68,22 @@ const transactionsSlice = createSlice({
         state.items.splice(index, 1);
       })
 
+      // * Modify transaction
+      .addCase(modifyTransaction.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(modifyTransaction.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(modifyTransaction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        debugger;
+        const index = state.items.findIndex(el => el.id === action.payload.id);
+        state.items.splice(index, 1, action.payload);
+      })
+
       // * Get all transactions
       .addCase(fetchAllTransactions.pending, state => {
         state.isLoading = true;
@@ -93,5 +116,6 @@ const transactionsSlice = createSlice({
   },
 });
 
-export const { setTrasactionIdForDelete } = transactionsSlice.actions;
+export const { setTrasactionIdForDelete, setTrasactionForUpdate } =
+  transactionsSlice.actions;
 export const transactionsReducer = transactionsSlice.reducer;

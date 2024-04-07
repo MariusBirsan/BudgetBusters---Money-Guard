@@ -1,7 +1,7 @@
 import TransactionTableRow from 'components/TransactionTableRow/TransactionTableRow';
 import styles from './TransactionsTable.module.css';
 
-const TransactionsTable = ({ data, openDeleteModal }) => {
+const TransactionsTable = ({ data, openDeleteModal, openEditModal }) => {
   return (
     <div className={styles.TransactionsTable}>
       <table className={styles.table}>
@@ -22,6 +22,7 @@ const TransactionsTable = ({ data, openDeleteModal }) => {
               key={item.id}
               transaction={item}
               openDeleteModal={openDeleteModal}
+              openEditModal={openEditModal}
             />
           ))}
         </tbody>

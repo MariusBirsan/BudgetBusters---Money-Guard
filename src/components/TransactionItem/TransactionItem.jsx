@@ -5,9 +5,12 @@ import {
   getTransactionCategory,
 } from '../../constants/TransactionConstants';
 import { useDispatch } from 'react-redux';
-import { setTrasactionIdForDelete } from '../../redux/transactions/slice';
+import {
+  setTrasactionForUpdate,
+  setTrasactionIdForDelete,
+} from '../../redux/transactions/slice';
 
-const TransactionItem = ({ transaction, openDeleteModal }) => {
+const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
   const { type, categoryId, comment, amount, transactionDate } = transaction;
 
   const dispatch = useDispatch();
@@ -15,6 +18,13 @@ const TransactionItem = ({ transaction, openDeleteModal }) => {
   const handleDeleteClick = () => {
     openDeleteModal();
     dispatch(setTrasactionIdForDelete(transaction.id));
+  };
+
+  const handleEditClick = () => {
+    openEditModal();
+    dispatch(
+      setTrasactionForUpdate({ id: transaction.id, type: transaction.type })
+    );
   };
 
   let textClass = '';
@@ -60,7 +70,11 @@ const TransactionItem = ({ transaction, openDeleteModal }) => {
         >
           Delete
         </button>
-        <button className={styles.editButton} type="button">
+        <button
+          className={styles.editButton}
+          type="button"
+          onClick={handleEditClick}
+        >
           <svg className={styles.editIcon}>
             <use href={`${icons}#icon-edit`}></use>
           </svg>
