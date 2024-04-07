@@ -100,11 +100,13 @@ body .container {
   }
 
   &::before {
+    z-index: auto;
     left: 33px;
     top: 23px;
   }
 
   &::after {
+    z-index: auto;
     left: 211px;
     top: 2px;
   }
