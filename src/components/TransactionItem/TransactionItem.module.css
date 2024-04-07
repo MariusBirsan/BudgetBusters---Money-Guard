@@ -87,9 +87,17 @@
 }
 
 .incomeText {
-  border-left: 10px solid #ff868d;
+  color: #ff868d;
 }
 
 .expenseText {
+  color: yellow;
+}
+
+.incomeBorder {
+  border-left: 10px solid #ff868d;
+}
+
+.expenseBorder {
   border-left: 10px solid yellow;
 }
