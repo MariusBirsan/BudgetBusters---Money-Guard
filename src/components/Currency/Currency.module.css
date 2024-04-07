@@ -94,7 +94,7 @@
   }
 
   &::before {
-    z-index: auto;
+    z-index: 1;
     left: 39px;
     top: 21px;
   }
