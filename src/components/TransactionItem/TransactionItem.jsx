@@ -28,16 +28,19 @@ const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
   };
 
   let textClass = '';
+  let borderClass = '';
 
   // Determine class based on data
   if (type === 'INCOME') {
     textClass = styles.incomeText; // Access class from CSS module
+    borderClass = styles.incomeBorder;
   } else if (type === 'EXPENSE') {
     textClass = styles.expenseText;
+    borderClass = styles.expenseBorder;
   }
 
   return (
-    <li className={`${styles.TransactionItem} ${textClass}`}>
+    <li className={`${styles.TransactionItem} ${borderClass}`}>
       <div className={`${styles.row} ${styles.firstRow}`}>
         <span className={styles.fixData}>Date</span>
         <span className={styles.dynamicData}>
@@ -45,8 +48,10 @@ const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
         </span>
       </div>
       <div className={`${styles.row} ${styles.secondRow}`}>
-        <span className={styles.fixData}>{type === 'INCOME' ? '+' : '-'}</span>
-        <span className={styles.dynamicData}>{type}</span>
+        <span className={styles.fixData}>Type</span>
+        <span className={styles.dynamicData}>
+          {type === 'INCOME' ? '+' : '-'}
+        </span>
       </div>
       <div className={`${styles.row} ${styles.thirdRow}`}>
         <span className={styles.fixData}>Category</span>
@@ -60,7 +65,7 @@ const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
       </div>
       <div className={`${styles.row} ${styles.fifthRow}`}>
         <span className={styles.fixData}>Sum</span>
-        <span className={styles.dynamicData}>{amount}</span>
+        <span className={`${styles.dynamicData} ${textClass}`}>{amount}</span>
       </div>
       <div className={`${styles.row} ${styles.sixthRow}`}>
         <button
