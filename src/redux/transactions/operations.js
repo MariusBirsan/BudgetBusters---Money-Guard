@@ -28,7 +28,6 @@ const addTransaction = createAsyncThunk(
 );
 
 // *Get all transaction //
-
 const fetchAllTransactions = createAsyncThunk(
   'transactions/fetchAllTransaction',
   async (_, thunkAPI) => {
@@ -126,5 +125,3 @@ export {
   fetchTransactionsSummary,
   modifyTransaction,
 };
-
-// todo: de continuat de aici, in jos //

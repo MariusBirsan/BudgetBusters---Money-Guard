@@ -56,4 +56,19 @@ const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   }
 });
 
-export { register, logIn, logOut };
+const getUserInfo = createAsyncThunk(
+  'auth/getUserInfo',
+  async (_, thunkAPI) => {
+    debugger;
+    try {
+      const response = await axios.get('/api/users/current');
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export { register, logIn, logOut, getUserInfo };

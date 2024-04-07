@@ -18,6 +18,7 @@ import {
 import { useSelector } from 'react-redux';
 import { selectTransactionForUpdate } from '../../redux/transactions/selectors';
 import { modifyTransaction } from '../../redux/transactions/operations';
+import { getUserInfo } from '../../redux/auth/operations';
 
 const ModifyTransactionFormNew = ({ closeModal }) => {
   const transactionForUpdate = useSelector(selectTransactionForUpdate);
@@ -64,6 +65,7 @@ const ModifyTransactionFormNew = ({ closeModal }) => {
       .unwrap()
       .then(() => {
         closeModal();
+        dispatch(getUserInfo());
       })
       .catch(error => {
         setStatus({ success: false, error: error });

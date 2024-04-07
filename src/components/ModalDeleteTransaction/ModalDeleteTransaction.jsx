@@ -7,6 +7,7 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deteleTransaction } from '../../redux/transactions/operations';
 import { selectTrasactionIdForDelete } from '../../redux/transactions/selectors';
+import { getUserInfo } from '../../redux/auth/operations';
 
 const ModalDeleteTransaction = ({ closeModal }) => {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const ModalDeleteTransaction = ({ closeModal }) => {
       .unwrap()
       .then(() => {
         closeModal();
+        dispatch(getUserInfo());
       })
       .catch(error => {
         console.log(error);

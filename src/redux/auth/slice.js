@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, logIn, logOut } from './operations';
+import { register, logIn, logOut, getUserInfo } from './operations';
 
 const initialState = {
   isLoading: false,
@@ -60,6 +60,12 @@ const authSlice = createSlice({
         state.user = { username: null, email: null, balance: null };
         state.isLoading = false;
         state.error = null;
+      })
+
+      // *Get user info
+      .addCase(getUserInfo.fulfilled, (state, action) => {
+        debugger;
+        state.user = action.payload;
       });
   },
 });

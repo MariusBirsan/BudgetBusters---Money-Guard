@@ -15,6 +15,7 @@ import {
 } from '../../constants/TransactionConstants';
 
 import { addTransaction } from '../../redux/transactions/operations';
+import { getUserInfo } from '../../redux/auth/operations';
 
 const AddTransactionFormNew = ({ closeModal }) => {
   const [isOnIncomeTab, setIsOnIncomeTab] = useState(true);
@@ -57,6 +58,7 @@ const AddTransactionFormNew = ({ closeModal }) => {
       .unwrap()
       .then(() => {
         closeModal();
+        dispatch(getUserInfo());
       })
       .catch(error => {
         setStatus({ success: false, error: error });
