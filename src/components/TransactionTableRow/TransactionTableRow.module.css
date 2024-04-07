@@ -11,11 +11,11 @@
 }
 
 .incomeText {
-  color: #ff868d;
+  color: yellow;
 }
 
 .expenseText {
-  color: yellow;
+  color: #ff868d;
 }
 
 .editButton {
