@@ -94,11 +94,13 @@
   }
 
   &::before {
+    z-index: 1;
     left: 39px;
     top: 21px;
   }
 
   &::after {
+    z-index: auto;
     left: 242px;
     top: -2px;
   }
