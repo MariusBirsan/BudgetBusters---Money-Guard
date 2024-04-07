@@ -19,6 +19,7 @@ import { useSelector } from 'react-redux';
 import { selectTransactionForUpdate } from '../../redux/transactions/selectors';
 import { modifyTransaction } from '../../redux/transactions/operations';
 import { getUserInfo } from '../../redux/auth/operations';
+import { FiCalendar } from 'react-icons/fi';
 
 const ModifyTransactionFormNew = ({ closeModal }) => {
   const transactionForUpdate = useSelector(selectTransactionForUpdate);
@@ -125,6 +126,7 @@ const ModifyTransactionFormNew = ({ closeModal }) => {
                   selected={startDate}
                   onChange={date => setStartDate(date)}
                 />
+                <FiCalendar className={styles.icon} />
               </div>
 
               <div className={`${styles.inputField} ${styles.comment}`}>

@@ -102,6 +102,16 @@ form .inputWrapper {
   transition: all 0.5s ease 0s;
 }
 
+.icon {
+  position: absolute;
+  top: 0;
+  right: 17px;
+  color: #734aef;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+
 form .buttonsWrapper {
   display: flex;
   flex-direction: column;
@@ -206,6 +216,10 @@ form .buttonsWrapper {
 
   .inputField.date {
     flex: 1;
+  }
+
+  .icon {
+    right: 8px;
   }
 
   .inputField.comment {

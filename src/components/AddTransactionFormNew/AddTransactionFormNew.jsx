@@ -17,6 +17,8 @@ import {
 import { addTransaction } from '../../redux/transactions/operations';
 import { getUserInfo } from '../../redux/auth/operations';
 
+import { FiCalendar } from 'react-icons/fi';
+
 const AddTransactionFormNew = ({ closeModal }) => {
   const [isOnIncomeTab, setIsOnIncomeTab] = useState(false); // Setăm inițial pe false pentru tab-ul "Expense"
   useEffect(() => {}, [isOnIncomeTab]);
@@ -126,6 +128,7 @@ const AddTransactionFormNew = ({ closeModal }) => {
                   selected={startDate}
                   onChange={date => setStartDate(date)}
                 />
+                <FiCalendar className={styles.icon} />
               </div>
 
               <div className={`${styles.inputField} ${styles.comment}`}>
