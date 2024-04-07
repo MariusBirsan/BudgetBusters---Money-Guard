@@ -12,7 +12,7 @@ import Currency from 'components/Currency/Currency';
 const SharedLayout = () => {
   const location = useLocation();
 
-  const locationCondition = location.pathname === '/dashboard/home';
+  const locationCondition = location.pathname === '/dashboard';
   const screenCondition = useMediaQuery({ query: '(min-width: 768px)' });
 
   const renderBalanceCondition = locationCondition || screenCondition;

@@ -18,7 +18,7 @@ function Balance() {
     <div className={styles.balance}>
       <h3>Your balance</h3>
       <p>
-        ₴ <span>{balance.toFixed(2)}</span>
+        ₴ <span>{balance ? balance.toFixed(2) : '0.00'}</span>
       </p>
     </div>
   );

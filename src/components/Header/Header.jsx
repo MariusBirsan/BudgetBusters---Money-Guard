@@ -3,7 +3,6 @@ import Logo from 'components/common/Logo/Logo';
 import icons from '../../images/icons/sprite.svg';
 import { useState } from 'react';
 import LogOutModal from 'components/LogOutModal/LogOutModal';
-import React from 'react';
 import { useAuth } from 'hooks';
 
 const Header = () => {
