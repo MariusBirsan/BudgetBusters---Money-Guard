@@ -18,7 +18,7 @@ import { addTransaction } from '../../redux/transactions/operations';
 import { getUserInfo } from '../../redux/auth/operations';
 
 const AddTransactionFormNew = ({ closeModal }) => {
-  const [isOnIncomeTab, setIsOnIncomeTab] = useState(true);
+  const [isOnIncomeTab, setIsOnIncomeTab] = useState(false); // Setăm inițial pe false pentru tab-ul "Expense"
   useEffect(() => {}, [isOnIncomeTab]);
 
   const screenCondition = useMediaQuery({ query: '(min-width: 768px)' });
@@ -93,6 +93,7 @@ const AddTransactionFormNew = ({ closeModal }) => {
                 type="checkbox"
                 id="switcherButton"
                 onChange={() => setIsOnIncomeTab(!isOnIncomeTab)}
+                checked={!isOnIncomeTab}
               />
               <label htmlFor="switcherButton"></label>
 
