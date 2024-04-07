@@ -2,6 +2,13 @@
   position: relative;
 }
 
+/* Ascunde săgețile de incrementare/decrementare din câmpul număr */
+.inputField input[type='number']::-webkit-inner-spin-button,
+.inputField input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .modalContent form {
   display: flex;
   flex-direction: column;
