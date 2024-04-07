@@ -1,8 +1,8 @@
 // StatisticsPage.jsx
 import React, { useRef } from 'react';
-import StatisticsChart from '../../components/Statistics/StatisticsChart';
-import StatisticsDashboard from '../../components/Statistics/StatisticsDashboard';
-import StatisticsTable from '../../components/Statistics/StatisticsTable';
+// import StatisticsChart from '../../components/Statistics/StatisticsChart';
+// import StatisticsDashboard from '../../components/Statistics/StatisticsDashboard';
+// import StatisticsTable from '../../components/Statistics/StatisticsTable';
 import styles from './StatisticsPage.module.css';
 import { fetchTransactionsSummary } from '../../redux/transactions/operations';
 
@@ -16,8 +16,6 @@ const StatisticsPage = () => {
   const yearRef = useRef();
 
   const handleChange = event => {
-    debugger;
-
     const mounth = mounthRef.current.value;
     const year = yearRef.current.value;
 

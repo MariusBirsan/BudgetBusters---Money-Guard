@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './ModifyTransactionFormNew.module.css';
 
 import FormButton from 'components/common/FormButton/FormButton';
