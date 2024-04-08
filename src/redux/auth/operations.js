@@ -59,7 +59,6 @@ const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 const getUserInfo = createAsyncThunk(
   'auth/getUserInfo',
   async (_, thunkAPI) => {
-    debugger;
     try {
       const response = await axios.get('/api/users/current');
 

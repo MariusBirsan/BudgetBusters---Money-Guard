@@ -1,87 +1,56 @@
-/* StatisticsPage.module.css */
-.statisticsContainer {
+.statisticsPage {
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin: 50px 0 50px 0;
+  gap: 32px;
 }
-.titleandchart {
+
+.statisticsPage .titleAndChart {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.titleAndChart .title {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 45px;
+  color: rgba(251, 251, 251, 1);
+}
+
+.statisticsPage .dashboardAndTable {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.title {
-  width: 135px;
-  height: 45px;
-  top: 156px;
-  left: 20px;
-  font-family: Poppins;
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 45px;
-  text-align: center;
-  color: #fbfbfb;
-}
-.chartContainer {
-  width: 280px;
-  height: 333px;
-  top: 156px;
-  left: 20px;
-  border: 0;
-  margin: auto;
-}
 
-.chartDashboardContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.tableContainer {
-  margin-top: 20px;
-}
-
-@media (min-width: 768px) {
-  /* Tableta și desktop */
-  .statisticsContainer {
+@media screen and (min-width: 768px) {
+  .statisticsPage {
     flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 32px;
-  }
-  .chartContainer {
-    width: 336px;
-    height: 336px;
-    top: 379px;
-    left: 32px;
-  }
-  .chartDashboardContainer {
-    flex-direction: row;
-    justify-content: space-between;
+    margin-top: 20px;
   }
 
-  .tableContainer {
-    width: 100%;
-    margin-top: 0;
+  .statisticsPage .titleAndChart {
+    gap: 20px;
+    align-self: flex-start;
+  }
+
+  .statisticsPage .dashboardAndTable {
+    flex: 1;
+    align-self: flex-start;
+    margin-top: 20px;
   }
 }
 
-@media (min-width: 1280px) {
-  .statisticsContainer {
+@media screen and (min-width: 1280px) {
+  .statisticsPage {
     display: inline-flex;
-    justify-content: center;
-    align-items: baseline;
+    margin-top: 0px;
     margin-left: 50px;
   }
-  .chartContainer {
-    width: 288px;
-    height: 288px;
-    top: 177px;
-    left: 549px;
-  }
 
-  .tableContainer {
-    width: 100%;
-    margin-top: 0;
+  .statisticsPage .dashboardAndTable {
+    margin-top: 65px;
   }
 }

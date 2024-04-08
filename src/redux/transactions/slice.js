@@ -107,7 +107,6 @@ const transactionsSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(fetchTransactionsSummary.fulfilled, (state, action) => {
-        debugger;
         state.isLoading = false;
         state.error = null;
         state.summary = action.payload;

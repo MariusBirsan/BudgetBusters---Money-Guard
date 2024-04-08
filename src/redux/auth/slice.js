@@ -64,7 +64,6 @@ const authSlice = createSlice({
 
       // *Get user info
       .addCase(getUserInfo.fulfilled, (state, action) => {
-        debugger;
         state.user = action.payload;
       });
   },
