@@ -77,6 +77,13 @@ div.navigation {
 
   .navLink.active .linkText {
     font-weight: 700;
+    font-size: 20px;
+    transition: all 0.5s ease 0s;
+  }
+
+  .navLink:not(.active):hover > .linkText {
+    text-decoration: underline;
+    transition: all 0.5s ease 0s;
   }
 
   .navLink .linkIcon {

@@ -12,10 +12,7 @@ import Currency from 'components/Currency/Currency';
 const SharedLayout = () => {
   const location = useLocation();
 
-  const locationCondition = location.pathname === '/dashboard';
   const screenCondition = useMediaQuery({ query: '(min-width: 768px)' });
-
-  const renderBalanceCondition = locationCondition || screenCondition;
 
   return (
     <>
@@ -26,14 +23,10 @@ const SharedLayout = () => {
           <div className={styles.sharedSectionElements}>
             <div className={styles.navAndBalanceContainer}>
               <Navigation />
-
-              {renderBalanceCondition ? <Balance /> : null}
+              {screenCondition && <Balance />}
             </div>
 
             {screenCondition && <Currency />}
-
-            {/* Todo: just for test */}
-            {/* {screenCondition && <TestCurrencyGraph />} */}
           </div>
 
           <Outlet />
