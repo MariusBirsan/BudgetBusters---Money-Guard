@@ -104,7 +104,6 @@ const fetchTransactionsSummary = createAsyncThunk(
       );
 
       // toast.info(`You have ${response.data.length} transactions in your list`);
-      debugger;
       // todo: mesaj cu nu ai nicio tranzactie in lista
       return response.data;
     } catch (error) {

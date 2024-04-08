@@ -1,100 +1,64 @@
-import React, { useEffect, useState } from 'react';
+import 'animate.css';
+
 import { Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
-import axios from 'axios';
+
 import { useSelector } from 'react-redux';
 import styles from './StatisticsChart.module.css';
-import { selectUserData } from '../../redux/auth/selectors';
+import {
+  selectFilteredCategories,
+  selectIsLoading,
+  selectTransactionsSummary,
+} from '../../redux/transactions/selectors';
+import { getTrasactionCategoryColor } from '../../constants/TransactionConstants';
+import LoadingSpinner from 'components/common/LoadingSpinner/Loader';
 
-const totalTextPlugin = balance => ({
-  id: 'totalTextPlugin',
-  beforeDraw: chart => {
-    const ctx = chart.ctx;
-    const width = chart.width;
-    const height = chart.height;
-    ctx.restore();
-    ctx.font = '18px Poppins, sans-serif';
-    ctx.fillStyle = 'white';
-    ctx.textBaseline = 'middle';
+const StatisticsChart = () => {
+  const isLoading = useSelector(selectIsLoading);
 
-    // Folosesc balance pentru a afișa soldul în mijlocul graficului
-    const text = `₴ ${balance.toFixed(2)}`,
-      textX = Math.round((width - ctx.measureText(text).width) / 2),
-      textY = height / 2;
+  const balanceForSpecificPeriod = useSelector(
+    selectTransactionsSummary
+  )?.periodTotal;
 
-    ctx.fillText(text, textX, textY);
-    ctx.save();
-  },
-});
+  const filteredCategories = useSelector(selectFilteredCategories);
 
-const StatisticsChart = ({ month, year }) => {
-  const [chartData, setChartData] = useState({
-    labels: [],
+  const chartLabels =
+    filteredCategories?.length > 0
+      ? filteredCategories?.map(item => item.name)
+      : ['There is no data for selected date'];
+
+  const chartValues =
+    filteredCategories?.length > 0
+      ? filteredCategories?.map(item => item.total * -1)
+      : [100];
+
+  const chartBackgroundColors =
+    filteredCategories?.length > 0
+      ? filteredCategories?.map(item => getTrasactionCategoryColor(item.name))
+      : ['rgba(255, 255, 255, 0.6'];
+
+  const chartData = {
+    labels: chartLabels,
     datasets: [
       {
-        data: [],
-        backgroundColor: [],
-        hoverOffset: 4,
+        data: chartValues,
+        backgroundColor: chartBackgroundColors,
+        borderWidth: 0,
+        hoverOffset: 5,
+        // hoverBorderWidth: 1,
       },
     ],
-  });
+  };
 
-  const token = useSelector(state => state.auth.token);
-  const user = useSelector(selectUserData);
-  const balance = user?.balance || 0; // Extrag soldul utilizatorului
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/api/transactions-summary', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            month: month || new Date().getMonth() + 1,
-            year: year || new Date().getFullYear(),
-          },
-        });
-
-        const filteredCategories = response.data.categoriesSummary.filter(
-          category => category.name !== 'Income'
-        );
-
-        const labels = filteredCategories.map(category => category.name);
-        const data = filteredCategories.map(category => category.total);
-        const backgroundColors = filteredCategories.map(
-          (category, index) =>
-            `hsl(${(index * 360) / filteredCategories.length}, 70%, 50%)`
-        );
-
-        setChartData({
-          labels,
-          datasets: [
-            {
-              data,
-              backgroundColor: backgroundColors,
-              hoverOffset: 4,
-            },
-          ],
-        });
-      } catch (error) {
-        console.error('Eroare la preluarea datelor pentru grafic:', error);
-      }
-    };
-
-    fetchData();
-  }, [month, year, token]);
-
-  const options = {
+  const chartOptions = {
     cutout: '70%',
     plugins: {
       legend: {
         display: false,
       },
       tooltip: {
-        enabled: false,
+        // enabled: false,
       },
-      totalTextPlugin: totalTextPlugin(balance),
     },
     elements: {
       arc: {
@@ -103,13 +67,24 @@ const StatisticsChart = ({ month, year }) => {
     },
   };
 
+  const textAnimatioClasses =
+    'animate__animated  animate__zoomIn animate__slow';
+
   return (
     <div className={styles.chartContainer}>
-      <Doughnut
-        data={chartData}
-        options={options}
-        plugins={[totalTextPlugin(balance)]}
-      />
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <Doughnut data={chartData} options={chartOptions} />
+          <div
+            className={`${styles.balance} ${textAnimatioClasses}`}
+          >{`₴ ${balanceForSpecificPeriod?.toFixed(2)}`}</div>
+        </>
+      )}
+      {/* 
+      <Doughnut data={chartData} options={chartOptions} />
+      <div className={styles.balance}>{`₴ ${balanceForSpecificPeriod.toFixed(2)}`}</div> */}
     </div>
   );
 };

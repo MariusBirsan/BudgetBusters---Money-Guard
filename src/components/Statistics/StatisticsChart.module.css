@@ -1,26 +1,20 @@
-/* StatisticsChart.module.css */
 .chartContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(251, 251, 251, 1);
   position: relative;
   width: 280px;
-  height: 333px;
-  margin: auto;
-  overflow: hidden;
+  height: 280px;
 }
 
-.totalText {
+.chartContainer .balance {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Poppins', sans-serif;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 600;
   line-height: 27px;
-  color: white;
-  text-align: center;
 }
 
-/* Ajustări pentru tableta și desktop */
 @media (min-width: 768px) {
   .chartContainer {
     width: 336px;

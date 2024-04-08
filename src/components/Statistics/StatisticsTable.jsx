@@ -1,94 +1,73 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
 import styles from './StatisticsTable.module.css';
+import { useSelector } from 'react-redux';
+import {
+  selectTransactionsSummary,
+  selectFilteredCategories,
+} from '../../redux/transactions/selectors';
+import { getTrasactionCategoryColor } from '../../constants/TransactionConstants';
+import { selectIsLoading } from '../../redux/transactions/selectors';
+import LoadingSpinner from 'components/common/LoadingSpinner/Loader';
 
-const StatisticsTable = ({ selectedMonth, selectedYear }) => {
-  const [categoriesSummary, setCategoriesSummary] = useState([]);
-  const [incomeSummary, setIncomeSummary] = useState(0);
-  const [expenseSummary, setExpenseSummary] = useState(0);
-  const token = useSelector(state => state.auth.token);
+const StatisticsTable = () => {
+  const transactionsSummary = useSelector(selectTransactionsSummary);
+  const filteredCategories = useSelector(selectFilteredCategories);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get('/api/transactions-summary', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            month: selectedMonth || new Date().getMonth() + 1,
-            year: selectedYear || new Date().getFullYear(),
-          },
-        });
+  const isLoading = useSelector(selectIsLoading);
 
-        const filteredCategories = data.categoriesSummary.filter(
-          category => category.name !== 'Income'
-        );
-        const backgroundColors = filteredCategories.map(
-          (category, index) =>
-            `hsl(${(index * 360) / filteredCategories.length}, 70%, 50%)`
-        );
+  const renderCategorySummary = () => {
+    return (
+      <div className={styles.categorySummary}>
+        {filteredCategories.map(item => (
+          <div key={item.name} className={styles.categoryRow}>
+            <div className={styles.category}>
+              <div
+                style={{
+                  backgroundColor: getTrasactionCategoryColor(item.name),
+                }}
+              ></div>
+              <span>{item.name}</span>
+            </div>
+            <span className={styles.sum}>{item.total * -1}</span>
+          </div>
+        ))}
 
-        const categoriesWithColors = filteredCategories.map(
-          (category, index) => ({
-            ...category,
-            color: backgroundColors[index],
-          })
-        );
+        <div className={styles.total}>
+          <div className={styles.totalExpenses}>
+            <span>Expenses</span>
+            <span>{transactionsSummary.expenseSummary * -1}</span>
+          </div>
 
-        setCategoriesSummary(categoriesWithColors);
-        setIncomeSummary(data.incomeSummary || 0);
-        setExpenseSummary(data.expenseSummary || 0);
-      } catch (error) {
-        console.error('Eroare la preluarea datelor:', error);
-      }
-    };
+          <div className={styles.totalIncome}>
+            <span>Income</span>
+            <span>{transactionsSummary.incomeSummary}</span>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
-    fetchData();
-  }, [selectedMonth, selectedYear, token]);
+  const renderMisingDataMessage = () => {
+    return <p className={styles.noData}>There is no data for selected date</p>;
+  };
 
   return (
-    <div>
-      <table className={styles.table}>
-        <thead>
-          <tr className={styles.headTable}>
-            <th>Category</th>
-            <th>Sum</th>
-          </tr>
-        </thead>
-        <tbody className={styles.contentTable}>
-          {categoriesSummary.map((category, index) => (
-            <tr className={styles.objectTable} key={index}>
-              <td>
-                <span
-                  style={{
-                    display: 'inline-block',
-                    width: '24px',
-                    height: '24px',
-                    borderRadius: '2px',
-                    backgroundColor: category.color,
-                    marginRight: '16px',
-                    verticalAlign: 'middle',
-                  }}
-                ></span>
-                {category.name}
-              </td>
-              <td>{category.total}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className={styles.summary}>
-        <p className={styles.type}>
-          <span className={styles.label}>Expense:</span>
-          <span className={styles.totalExpense}>{expenseSummary}</span>
-        </p>
-        <p className={styles.type}>
-          <span className={styles.label}>Income:</span>
-          <span className={styles.totalIncome}>{incomeSummary}</span>
-        </p>
+    <div className={styles.statisticsTable}>
+      <div className={styles.tableHead}>
+        <span>Category</span>
+        <span>Sum</span>
       </div>
+
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : filteredCategories?.length > 0 ? (
+        renderCategorySummary()
+      ) : (
+        renderMisingDataMessage()
+      )}
+
+      {/* {filteredCategories?.length > 0
+        ? renderCategorySummary()
+        : renderMisingDataMessage()} */}
     </div>
   );
 };
