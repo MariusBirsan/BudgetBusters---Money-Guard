@@ -7,8 +7,9 @@ import { useMediaQuery } from 'react-responsive';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import ReactDatePicker from 'react-datepicker';
+import ReactDatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import enUS from 'date-fns/locale/en-US'; // Importăm localizarea pentru engleză
 import {
   transactionCategories,
   getTransactionId,
@@ -16,6 +17,11 @@ import {
 
 import { addTransaction } from '../../redux/transactions/operations';
 import { getUserInfo } from '../../redux/auth/operations';
+
+import { FiCalendar } from 'react-icons/fi';
+
+// Înregistram localizarea pentru utilizarea în componenta ReactDatePicker
+registerLocale('en-US', enUS);
 
 const AddTransactionFormNew = ({ closeModal }) => {
   const [isOnIncomeTab, setIsOnIncomeTab] = useState(false); // Setăm inițial pe false pentru tab-ul "Expense"
@@ -125,7 +131,10 @@ const AddTransactionFormNew = ({ closeModal }) => {
                   dateFormat="dd.MM.yyyy"
                   selected={startDate}
                   onChange={date => setStartDate(date)}
+                  locale="us-US" // Setăm localizarea la engleză
+                  calendarStartDay={1} // Setăm începutul săptămânii la luni
                 />
+                <FiCalendar className={styles.icon} />
               </div>
 
               <div className={`${styles.inputField} ${styles.comment}`}>
