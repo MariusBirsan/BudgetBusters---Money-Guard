@@ -110,11 +110,10 @@ const transactionsSlice = createSlice({
         state.error = null;
         state.summary = action.payload;
       });
-
-    // todo: de continuat de aici in jos
   },
 });
 
 export const { setTrasactionIdForDelete, setTrasactionForUpdate } =
   transactionsSlice.actions;
+
 export const transactionsReducer = transactionsSlice.reducer;

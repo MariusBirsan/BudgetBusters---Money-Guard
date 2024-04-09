@@ -11,7 +11,7 @@ const RegisterPage = () => {
   const [forcedLoading, setForcedLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setForcedLoading(false), 3500);
+    setTimeout(() => setForcedLoading(false), 2000);
   }, [forcedLoading]);
 
   if (forcedLoading) {

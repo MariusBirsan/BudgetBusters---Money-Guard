@@ -65,7 +65,9 @@ const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
       </div>
       <div className={`${styles.row} ${styles.fifthRow}`}>
         <span className={styles.fixData}>Sum</span>
-        <span className={`${styles.dynamicData} ${textClass}`}>{amount}</span>
+        <span className={`${styles.dynamicData} ${textClass}`}>
+          {type === 'INCOME' ? amount : amount * -1}
+        </span>
       </div>
       <div className={`${styles.row} ${styles.sixthRow}`}>
         <button

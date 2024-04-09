@@ -33,9 +33,7 @@ const fetchAllTransactions = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get('/api/transactions');
-      // toast.info(`You have ${response.data.length} transactions in your list`);
 
-      // todo: mesaj cu nu ai nicio tranzactie in lista
       return response.data;
     } catch (error) {
       const errorNotify =
@@ -80,7 +78,7 @@ const modifyTransaction = createAsyncThunk(
         transactionData
       );
 
-      toast.success('Transaction modified successfully !');
+      toast.success('Transaction modified with succes!');
       return response.data;
     } catch (error) {
       const errorNotify =
@@ -102,15 +100,12 @@ const fetchTransactionsSummary = createAsyncThunk(
         `/api/transactions-summary?month=${mounth}&year=${year}`
       );
 
-      // toast.info(`You have ${response.data.length} transactions in your list`);
-      // todo: mesaj cu nu ai nicio tranzactie in lista
       return response.data;
     } catch (error) {
-      // const errorNotify =
-      //   error.response.data.message ??
-      //   `Operation failed and transaction not saved. We are facing some technical problems with our servers ! `;
-
-      // toast.error(errorNotify);
+      const errorNotify =
+        error.response.data.message ??
+        `Operation failed and transaction not saved. We are facing some technical problems with our servers ! `;
+      toast.error(errorNotify);
       return thunkAPI.rejectWithValue(error);
     }
   }

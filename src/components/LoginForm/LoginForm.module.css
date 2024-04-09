@@ -45,7 +45,7 @@
 
 .inputField input {
   width: 100%;
-  outline: nonec;
+  outline: none;
   border: none;
   border-bottom: 1px solid #ffffff66;
   background-color: transparent;
@@ -56,6 +56,10 @@
   color: #ffffff99;
   transition: all 0.35s ease-in-out;
   position: relative;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .inputField input:focus {
