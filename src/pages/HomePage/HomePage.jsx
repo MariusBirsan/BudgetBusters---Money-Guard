@@ -12,8 +12,8 @@ import { selectAllTransactions } from '../../redux/transactions/selectors';
 import { fetchAllTransactions } from '../../redux/transactions/operations';
 
 import ModalDeleteTransaction from 'components/ModalDeleteTransaction/ModalDeleteTransaction';
-import ModalAddTransactionNew from 'components/ModalAddTransactionNew/ModalAddTransactionNew';
-import ModalEditTransactionNew from 'components/ModalEditTransactionNew/ModalEditTransactionNew';
+import ModalAddTransactionNew from 'components/ModalAddTransaction/ModalAddTransaction';
+import ModalEditTransaction from 'components/ModalEditTransaction/ModalEditTransaction';
 
 import LoadingScreenSharedLayoutPages from 'components/common/LoadingScreenSharedLayoutPages/LoadingScreenSharedLayoutPages';
 import Balance from 'components/Balance/Balance';
@@ -79,9 +79,7 @@ const HomePage = () => {
         )}
 
         {isEditModalOpen && (
-          <ModalEditTransactionNew
-            closeModal={() => setisEditModalOpen(false)}
-          />
+          <ModalEditTransaction closeModal={() => setisEditModalOpen(false)} />
         )}
       </>
     </>
