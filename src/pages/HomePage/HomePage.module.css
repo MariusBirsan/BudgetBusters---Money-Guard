@@ -11,6 +11,7 @@
   .HomePage {
     display: inline-flex;
     justify-content: center;
+    align-self: flex-start;
 
     margin-left: 64px;
     margin-top: 0;
