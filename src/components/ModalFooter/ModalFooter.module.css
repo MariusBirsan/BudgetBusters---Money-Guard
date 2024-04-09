@@ -50,11 +50,17 @@
   align-items: center;
   gap: 10px;
   padding-top: 10px;
-  width: 100%;
+  width: 333px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .footerCards {
   width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .modalContent p {
@@ -71,9 +77,39 @@
   justify-content: space-between;
 }
 
+.footerTeamCard.marius {
+  animation-delay: 0.5s;
+}
+
+.footerTeamCard.dan {
+  animation-delay: 1.5s;
+}
+
+.footerTeamCard.rares {
+  animation-delay: 2.5s;
+}
+
+.footerTeamCard.cristina {
+  animation-delay: 3.5s;
+}
+
+.footerTeamCard.robert {
+  animation-delay: 4.5s;
+}
+
+.footerTeamCard.lidia {
+  animation-delay: 5.5s;
+}
+
+.footerTeamCard em {
+  text-align: center;
+}
+
 .teamMemberImage {
   width: 60px;
   height: auto;
+
+  border-radius: 100%;
 }
 
 .footerMemberInfo {
@@ -82,7 +118,9 @@
 }
 
 .footerTeamName {
-  margin-right: 8px;
+  margin-left: 15px;
+
+  text-align: center;
 }
 
 .footerGithubIcon,
@@ -107,6 +145,26 @@
 }
 
 @media screen and (min-width: 768px) {
+  .footerTeamCard {
+    display: grid;
+    grid-template-columns: 60px 170px 180px 50px;
+
+    align-items: center;
+  }
+
+  .footerTeamCard em {
+    text-align: left;
+  }
+
+  .modalContent {
+    width: 100%;
+  }
+
+  .footerTeamName {
+    margin-left: 30px;
+    text-align: left;
+  }
+
   .modalFooter {
     /* background-color: hsla(256, 75%, 20%, 0.4); */
     background-color: #220d5b3b;
