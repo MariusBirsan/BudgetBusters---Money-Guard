@@ -4,6 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 import Logo from 'components/common/Logo/Logo';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import FormButton from 'components/common/FormButton/FormButton';
+import 'animate.css';
 
 import MariusBirsanImage from '../../../src/images/members-pictures/marius_birsan.webp';
 import DanReteganImage from '../../../src/images/members-pictures/dan_retegan.webp';
@@ -61,6 +62,8 @@ const ModalFooter = ({ closeModal }) => {
 
   const screenCondition = useMediaQuery({ query: '(min-width: 768px)' });
 
+  const animation = 'animate__animated animate__fadeInDown  animate__slow';
+
   return (
     <div
       className={styles.modalFooter}
@@ -75,7 +78,9 @@ const ModalFooter = ({ closeModal }) => {
 
           <div className={styles.footerCards}>
             {/* 1) Marius Birsan */}
-            <div className={styles.footerTeamCard}>
+            <div
+              className={`${styles.footerTeamCard} ${animation} ${styles.marius}`}
+            >
               <img
                 src={imageUrlMariusBirsan}
                 alt="Marius Birsan"
@@ -107,7 +112,9 @@ const ModalFooter = ({ closeModal }) => {
             </div>
 
             {/* 2) Dan Retegan */}
-            <div className={styles.footerTeamCard}>
+            <div
+              className={`${styles.footerTeamCard} ${animation} ${styles.dan}	`}
+            >
               <img
                 src={imageUrlDanRetegan}
                 alt="Dan Retegan"
@@ -140,7 +147,9 @@ const ModalFooter = ({ closeModal }) => {
             </div>
 
             {/* 3) Rares Dragan */}
-            <div className={styles.footerTeamCard}>
+            <div
+              className={`${styles.footerTeamCard} ${animation} ${styles.rares}`}
+            >
               <img
                 src={imageUrlRaresDragan}
                 alt="Rares Dragan"
@@ -172,7 +181,9 @@ const ModalFooter = ({ closeModal }) => {
             </div>
 
             {/* 4) Cristina Laes */}
-            <div className={styles.footerTeamCard}>
+            <div
+              className={`${styles.footerTeamCard} ${animation} ${styles.cristina}`}
+            >
               <img
                 src={imageUrlCristinaLaes}
                 alt="Cristina Laes"
@@ -205,7 +216,9 @@ const ModalFooter = ({ closeModal }) => {
             </div>
 
             {/* 5) Robert Uță */}
-            <div className={styles.footerTeamCard}>
+            <div
+              className={`${styles.footerTeamCard} ${animation} ${styles.robert}`}
+            >
               <img
                 src={imageUrlRobertUta}
                 alt="Robert Uță"
@@ -238,7 +251,9 @@ const ModalFooter = ({ closeModal }) => {
             </div>
 
             {/* 6) Lidia Molodiuc */}
-            <div className={styles.footerTeamCard}>
+            <div
+              className={`${styles.footerTeamCard} ${animation} ${styles.lidia}`}
+            >
               <img
                 src={imageUrlLidiaMolodiuc}
                 alt="Lidia Molodiuc"
