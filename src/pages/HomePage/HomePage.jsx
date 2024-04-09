@@ -14,6 +14,8 @@ import { fetchAllTransactions } from '../../redux/transactions/operations';
 import ModalDeleteTransaction from 'components/ModalDeleteTransaction/ModalDeleteTransaction';
 import ModalAddTransactionNew from 'components/ModalAddTransactionNew/ModalAddTransactionNew';
 import ModalEditTransactionNew from 'components/ModalEditTransactionNew/ModalEditTransactionNew';
+import LoadingScreenSharedLayoutPages from 'components/common/LoadingScreenSharedLayoutPages/LoadingScreenSharedLayoutPages';
+import Balance from 'components/Balance/Balance';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -30,9 +32,23 @@ const HomePage = () => {
 
   const screenCondition = useMediaQuery({ query: '(min-width: 768px)' });
 
+  const [forcedLoading, setForcedLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setForcedLoading(false), 1500);
+  }, [forcedLoading]);
+
+  if (forcedLoading) {
+    return <LoadingScreenSharedLayoutPages />;
+  }
+
+  const animation = 'animate__animated  animate__fadeIn animate__slow';
+
   return (
     <>
-      <div className={styles.HomePage}>
+      <div className={`${styles.HomePage} ${animation}`}>
+        {!screenCondition && <Balance />}
+
         {screenCondition ? (
           <TransactionsTable
             data={data}

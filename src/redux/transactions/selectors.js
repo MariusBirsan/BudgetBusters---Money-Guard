@@ -1,22 +1,18 @@
-// import { createSelector } from '@reduxjs/toolkit';
+import { createSelector } from '@reduxjs/toolkit';
 
 const selectAllTransactions = state => state.transactions.items;
 
 const selectTransactionsSummary = state => state.transactions.summary;
 
-const selectFilteredCategories = state => {
-  const categorieSummary = state.transactions.summary?.categoriesSummary;
-  return categorieSummary?.filter(item => item.name !== 'Income');
-};
+const selectCategoriesSummary = state =>
+  state.transactions.summary?.categoriesSummary;
 
-// const selectFilteredCategories = createSelector(
-//   [selectTransactionsSummary],
-//   transactionsSummary => {
-//     return transactionsSummary?.categorieSummary?.filter(
-//       item => item.name !== 'Income'
-//     );
-//   }
-// );
+const selectFilteredCategories = createSelector(
+  [selectCategoriesSummary],
+  categoriesSummary => {
+    return categoriesSummary?.filter(item => item.name !== 'Income');
+  }
+);
 
 const selectTrasactionIdForDelete = state =>
   state.transactions.trasactionIdForDelete;

@@ -53,7 +53,7 @@ const TransactionTableRow = ({
       </td>
       <td className={styles.TransactionCommentColumn}>{comment}</td>
       <td className={`${styles.TransactionAmountColumn} ${textClass}`}>
-        {amount}
+        {type === 'INCOME' ? amount : amount * -1}
       </td>
       <td className={styles.TransactionEditColumn}>
         <button

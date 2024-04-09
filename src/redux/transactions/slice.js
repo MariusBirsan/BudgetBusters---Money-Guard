@@ -79,7 +79,6 @@ const transactionsSlice = createSlice({
       .addCase(modifyTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        debugger;
         const index = state.items.findIndex(el => el.id === action.payload.id);
         state.items.splice(index, 1, action.payload);
       })
@@ -111,11 +110,10 @@ const transactionsSlice = createSlice({
         state.error = null;
         state.summary = action.payload;
       });
-
-    // todo: de continuat de aici in jos
   },
 });
 
 export const { setTrasactionIdForDelete, setTrasactionForUpdate } =
   transactionsSlice.actions;
+
 export const transactionsReducer = transactionsSlice.reducer;
