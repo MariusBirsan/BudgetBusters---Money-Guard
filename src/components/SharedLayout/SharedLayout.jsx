@@ -6,12 +6,9 @@ import Navigation from 'components/Navigation/Navigation';
 import Balance from 'components/Balance/Balance';
 
 import { useMediaQuery } from 'react-responsive';
-//import TestCurrencyGraph from 'components/TestCurrencyGraph/TestCurrencyGraph';
 import Currency from 'components/Currency/Currency';
 
 const SharedLayout = () => {
-  const location = useLocation();
-
   const screenCondition = useMediaQuery({ query: '(min-width: 768px)' });
 
   return (
