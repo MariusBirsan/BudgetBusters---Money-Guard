@@ -7,7 +7,7 @@ import Balance from 'components/Balance/Balance';
 
 import { useMediaQuery } from 'react-responsive';
 import Currency from 'components/Currency/Currency';
-import Footer from 'components/footer/Footer';
+import Footer from 'components/Footer/Footer';
 
 const SharedLayout = () => {
   const screenCondition = useMediaQuery({ query: '(min-width: 768px)' });

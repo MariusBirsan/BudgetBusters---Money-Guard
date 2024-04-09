@@ -1,9 +1,9 @@
 import styles from './StatisticsPage.module.css';
 import { useEffect, useState } from 'react';
 
-import StatisticsDashboard from '../../components/Statistics/StatisticsDashboard';
-import StatisticsTable from '../../components/Statistics/StatisticsTable';
-import StatisticsChart from 'components/Statistics/StatisticsChart';
+import StatisticsDashboard from '../../components/StatisticsDashboard/StatisticsDashboard';
+import StatisticsTable from '../../components/StatisticsTable/StatisticsTable';
+import StatisticsChart from 'components/StatisticsChart/StatisticsChart';
 import LoadingScreenSharedLayoutPages from 'components/common/LoadingScreenSharedLayoutPages/LoadingScreenSharedLayoutPages';
 
 const StatisticsPage = () => {
