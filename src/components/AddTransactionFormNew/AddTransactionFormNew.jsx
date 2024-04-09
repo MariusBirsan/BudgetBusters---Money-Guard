@@ -131,7 +131,7 @@ const AddTransactionFormNew = ({ closeModal }) => {
                   dateFormat="dd.MM.yyyy"
                   selected={startDate}
                   onChange={date => setStartDate(date)}
-                  locale="us-US" // Setăm localizarea la engleză
+                  locale="en-US" // Setăm localizarea la engleză
                   calendarStartDay={1} // Setăm începutul săptămânii la luni
                 />
                 <FiCalendar className={styles.icon} />
