@@ -74,7 +74,6 @@ const modifyTransaction = createAsyncThunk(
   'transactions/modifyTransaction',
 
   async ({ transactionId, transactionData }, thunkAPI) => {
-    debugger;
     try {
       const response = await axios.patch(
         `/api/transactions/${transactionId}`,

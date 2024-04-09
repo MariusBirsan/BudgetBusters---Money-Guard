@@ -14,6 +14,7 @@ import { fetchAllTransactions } from '../../redux/transactions/operations';
 import ModalDeleteTransaction from 'components/ModalDeleteTransaction/ModalDeleteTransaction';
 import ModalAddTransactionNew from 'components/ModalAddTransactionNew/ModalAddTransactionNew';
 import ModalEditTransactionNew from 'components/ModalEditTransactionNew/ModalEditTransactionNew';
+import Footer from 'components/footer/Footer';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -67,6 +68,7 @@ const HomePage = () => {
           />
         )}
       </>
+      <Footer />
     </>
   );
 };
