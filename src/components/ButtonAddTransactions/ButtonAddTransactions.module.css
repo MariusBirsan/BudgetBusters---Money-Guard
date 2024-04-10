@@ -1,7 +1,7 @@
 .ButtonOpenModal {
   display: flex;
   position: fixed;
-  bottom: 20px;
+  bottom: 38px;
   right: 20px;
   justify-content: center;
   align-items: center;
@@ -23,14 +23,14 @@
 
 @media only screen and (min-width: 768px) {
   .ButtonOpenModal {
-    bottom: 50px;
+    bottom: 57px;
     margin-right: 12px;
   }
 }
 
 @media only screen and (min-width: 1280px) {
   .ButtonOpenModal {
-    bottom: 50px;
+    bottom: 57px;
     margin-right: 0;
   }
 }
