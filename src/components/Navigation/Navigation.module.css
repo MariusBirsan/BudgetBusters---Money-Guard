@@ -1,8 +1,10 @@
 div.navigation {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   gap: 38px;
   align-self: center;
+  width: 100%;
 }
 
 .navLink .linkText {
