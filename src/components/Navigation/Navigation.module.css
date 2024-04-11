@@ -104,3 +104,9 @@ div.navigation {
     height: 8px;
   }
 }
+
+/* @media screen and (min-width: 1280px) {
+  div.navigation {
+    padding-left: 16px;
+  }
+} */

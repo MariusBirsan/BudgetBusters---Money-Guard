@@ -9,6 +9,7 @@ import {
   setTrasactionForUpdate,
   setTrasactionIdForDelete,
 } from '../../redux/transactions/slice';
+import { formatNumberWithSpaces } from 'components/common/formatNumberWithSpaces';
 
 const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
   const { type, categoryId, comment, amount, transactionDate } = transaction;
@@ -66,7 +67,9 @@ const TransactionItem = ({ transaction, openDeleteModal, openEditModal }) => {
       <div className={`${styles.row} ${styles.fifthRow}`}>
         <span className={styles.fixData}>Sum</span>
         <span className={`${styles.dynamicData} ${textClass}`}>
-          {type === 'INCOME' ? amount : amount * -1}
+          {type === 'INCOME'
+            ? formatNumberWithSpaces(amount)
+            : formatNumberWithSpaces(amount * -1)}
         </span>
       </div>
       <div className={`${styles.row} ${styles.sixthRow}`}>
