@@ -5,6 +5,11 @@ import styles from './Balance.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserInfo } from '../../redux/auth/operations';
 
+// Funcție auxiliară pentru a formata numărul cu gruparea cifrelor câte trei și un mic spațiu
+function formatNumberWithSpaces(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
 function Balance() {
   const dispatch = useDispatch();
 
@@ -18,7 +23,10 @@ function Balance() {
     <div className={styles.balance}>
       <h3>Your balance</h3>
       <p>
-        ₴ <span>{balance ? balance.toFixed(2) : '0.00'}</span>
+        ₴{' '}
+        <span>
+          {balance ? formatNumberWithSpaces(balance.toFixed(2)) : '0.00'}
+        </span>
       </p>
     </div>
   );
