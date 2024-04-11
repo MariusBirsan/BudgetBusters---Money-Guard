@@ -4,11 +4,7 @@ import { selectBalance } from '../../redux/auth/selectors';
 import styles from './Balance.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserInfo } from '../../redux/auth/operations';
-
-// Funcție auxiliară pentru a formata numărul cu gruparea cifrelor câte trei și un mic spațiu
-function formatNumberWithSpaces(number) {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-}
+import { formatNumberWithSpaces } from 'components/common/formatNumberWithSpaces';
 
 function Balance() {
   const dispatch = useDispatch();
