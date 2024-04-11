@@ -9,6 +9,8 @@
   top: 0;
   right: 0;
   width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
   z-index: 500;
 }
 
@@ -68,9 +70,9 @@
 
 @media screen and (min-width: 768px) {
   .header {
-    padding-top: 16px;
-    padding-bottom: 16px;
+    padding: 16px, 32px;
     position: relative;
+    width: 100%;
     z-index: 100;
   }
 
@@ -111,4 +113,11 @@
 .userMenu .logOutBtn:active::after {
   transform: scale(1.15);
   transition: all 0.35s ease-in-out;
+}
+
+@media screen and (min-width: 1280px) {
+  .header {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
